@@ -40,7 +40,7 @@ export function Services() {
     <Section id="services">
       <SectionHeading
         eyebrow="Services"
-        title="Three ways I help"
+        title="Three ways to serve"
         kicker="Pick the system that fits where your business is today. We can always combine pieces if you need a mix."
       />
 
