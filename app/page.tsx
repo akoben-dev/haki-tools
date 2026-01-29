@@ -4,6 +4,8 @@ import { Navbar } from "@/components/Navbar";
 import { Services } from "@/components/Services";
 import { Pricing } from "@/components/Pricing";
 import { FAQ } from "@/components/FAQ";
+import { ContactSection } from "@/components/ContactSection";
+
 
 export default function HomePage() {
   return (
@@ -13,6 +15,7 @@ export default function HomePage() {
       <Services />
       <Pricing />
       <FAQ />
+      <ContactSection />
     </main>
   );
 }
