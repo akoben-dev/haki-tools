@@ -7,33 +7,25 @@ const services = [
     name: "Always‑On Booking Website System",
     blurb:
       "Turn your website into a simple booking system so people can see what you do, trust you, and reach you fast—without you needing to sit by the phone.",
-    points: [
-      "Clean, mobile‑friendly site that makes what you do and where you work instantly clear.",
-      "Buttons to call, text, or book from anywhere on the site.",
-      "Photos, FAQs, and reviews so people feel comfortable choosing you.",
-    ],
+    points: [/* ... */],
+    href: "/services/booking-system",
   },
   {
     name: "Follow‑Up That Actually Happens",
     blurb:
       "Set up simple pages and follow‑ups so when someone asks for a quote, they don’t slip through the cracks.",
-    points: [
-      "Focused “Get a quote” or “Book now” page that collects the info you need.",
-      "Automatic confirmations and reminders by email or text.",
-      "Basic stats so you can see what’s bringing in real jobs, not just clicks.",
-    ],
+    points: [/* ... */],
+    href: "/services/follow-up",
   },
   {
     name: "AI‑Powered Inbox & Workflow Setup",
     blurb:
       "Add an AI helper that answers common questions, gathers job details, and sends the right replies so you’re not stuck answering the same messages all day.",
-    points: [
-      "AI that can answer common questions and collect job details before you jump in.",
-      "Smart routing so emergencies, quotes, and quick questions go to the right place.",
-      "Training so you and your team know how to tweak what it says.",
-    ],
+    points: [/* ... */],
+    href: "/services/ai-inbox",
   },
 ];
+
 
 export function Services() {
   return (
@@ -62,6 +54,12 @@ export function Services() {
                 </li>
               ))}
             </ul>
+            <a
+                href={service.href}
+                className="mt-4 inline-flex items-center text-xs font-medium text-muted hover:text-foreground"
+            >
+    Learn more →
+  </a>
           </div>
         ))}
       </div>
