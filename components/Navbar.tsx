@@ -1,4 +1,6 @@
 // components/Navbar.tsx
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "./Container";
 
 export function Navbar() {
@@ -7,12 +9,15 @@ export function Navbar() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           {/* Left: Haki Tools logo */}
-          <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-2xl bg-accent shadow-soft" />
-            <span className="text-sm font-medium tracking-[0.18em] uppercase text-foreground">
-              Haki Tools
-            </span>
-          </div>
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/haki-logo-horizontal.png"
+              alt="Haki Tools"
+              width={140}   // adjust after you see it
+              height={32}
+              priority
+            />
+          </Link>
 
           {/* Center: nav links */}
           <nav className="hidden items-center gap-8 text-sm text-muted md:flex">
