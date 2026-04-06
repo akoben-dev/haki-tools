@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ── SEO ──────────────────────────────────────────────── -->
+  <title>Haki Tools | Technology to Better Your Business | Charleston, SC</title>
+  <meta name="description" content="Haki Tools helps Charleston-area small businesses launch websites, upgrade their online presence, and automate workflows with AI. Built for SC business owners." />
+  <meta name="keywords" content="web design Charleston SC, website development Charleston, AI automation small business South Carolina, web app development Charleston, local business website" />
+  <link rel="canonical" href="https://hakitools.com" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Haki Tools | Technology to Better Your Business" />
+  <meta property="og:description" content="Haki Tools helps Charleston-area small businesses launch, upgrade, and automate — websites, web apps, and AI workflows built for SC businesses." />
+  <meta property="og:url"         content="https://hakitools.com" />
+  <meta property="og:image"       content="assets/logos/haki_tools_green.svg" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Haki Tools | Technology to Better Your Business" />
+  <meta name="twitter:description" content="Launch, upgrade, or automate your business with Haki Tools — based in Charleston, SC." />
+  <meta name="twitter:image"       content="assets/logos/haki_tools_green.svg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Haki Tools",
+    "description": "Technology consulting and web development for small businesses in Charleston, SC and surrounding South Carolina.",
+    "url": "https://hakitools.com",
+    "areaServed": { "@type": "State", "name": "South Carolina" },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Charleston",
+      "addressRegion": "SC",
+      "addressCountry": "US"
+    },
+    "serviceType": ["Web Design", "Web Development", "AI Automation", "Business Website"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <!-- Favicon — official mark -->
+  <link rel="icon" type="image/svg+xml" href="assets/logos/favicon.svg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <style>
+    /* Inline critical reset */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img, picture, svg { display: block; max-width: 100%; height: auto; }
+    ul[role="list"], ol[role="list"] { list-style: none; }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      text-wrap: balance;
+      line-height: 1.1;
+    }
+    p, li { text-wrap: pretty; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    ::selection { background: rgba(158,226,191,0.22); color: var(--color-text); }
+    :focus-visible { outline: 2px solid var(--color-green); outline-offset: 3px; border-radius: 3px; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--color-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 99px; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════════════════ -->
+  <header role="banner">
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+      <div class="container">
+        <div class="nav-inner">
+          <!-- Official horizontal SVG logo lockup in nav -->
+          <a href="#" class="nav-logo" aria-label="Haki Tools — home">
+            <img src="assets/logos/haki_tools_horizontal.svg"
+                 alt="Haki Tools"
+                 height="32" style="width:auto;height:32px;" />
+          </a>
+
+          <ul class="nav-links" role="list">
+            <li><a href="#story-band">What we build</a></li>
+            <li><a href="#contact">Why it matters</a></li>
+            <li><a href="#contact">Process</a></li>
+            <li><a href="#contact">FAQ</a></li>
+          </ul>
+
+          <a href="#contact" class="btn btn-primary nav-cta hide-mobile">
+            Tell me what you're building
+          </a>
+
+          <button class="nav-toggle"
+                  aria-label="Open navigation menu"
+                  aria-expanded="false"
+                  aria-controls="mobile-drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div id="mobile-drawer" class="nav-mobile-drawer" role="dialog" aria-label="Mobile navigation">
+      <ul class="nav-links" role="list">
+        <li><a href="#story-band">What we build</a></li>
+        <li><a href="#contact">Why it matters</a></li>
+        <li><a href="#contact">Process</a></li>
+        <li><a href="#contact">FAQ</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary">Tell me what you're building</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════════
+         HERO — Scroll-pinned particle sequence
+         
+         Hero content stack order (v3.3):
+         1. Official horizontal logo    ← brand name / heading
+         2. Tagline (no period)         ← sub-heading role
+         3. CTAs
+         
+         Particle canvas: ambient particles → converge to logo geometry.
+         After convergence, the REAL uploaded SVG logo fades in as <img>.
+         No canvas-drawn logo approximations anywhere.
+    ═══════════════════════════════════════════════════════════ -->
+    <div class="hero-pin-wrapper" id="hero-pin" style="height:320vh">
+      <section class="hero" id="hero" aria-labelledby="hero-heading">
+
+        <!-- Particle canvas — fills hero section -->
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+        <!--
+          Real logo reveal — the ONLY logo mark shown after convergence.
+          Uses the official uploaded haki_tools_green.svg directly.
+          Positioned/sized by hero-particles.js. Fades in when particles
+          have converged (scroll ~72%+ of hero pin).
+        -->
+        <div id="hero-logo-reveal" class="hero-logo-reveal" aria-hidden="true">
+          <img
+            src="assets/logos/haki_tools_green.svg"
+            alt=""
+            draggable="false"
+          />
+        </div>
+
+        <!-- Gradient that grounds the content at the bottom -->
+        <div aria-hidden="true" class="hero-gradient"></div>
+
+        <!-- Hero content — centered in sticky viewport -->
+        <div class="hero-content">
+
+          <!-- 1 · Official horizontal logo — the brand name IS the heading -->
+          <div class="hero-logo-lockup" aria-label="Haki Tools">
+            <img
+              src="assets/logos/haki_tools_horizontal.svg"
+              alt="Haki Tools"
+              class="hero-logo-img"
+            />
+          </div>
+          <!-- Hidden h1 for accessibility / SEO -->
+          <h1 id="hero-heading" class="sr-only">Haki Tools</h1>
+
+          <!-- 3 · Tagline — no period per brand direction -->
+          <p class="hero-tagline">
+            Technology to better your business
+          </p>
+
+          <!-- 4 · CTAs -->
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary hero-cta-primary">
+              Tell me what you're building
+            </a>
+            <a href="#story-band" class="btn btn-ghost">
+              See what we build ↓
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="hero-scroll-indicator" aria-hidden="true">
+          <span class="hero-scroll-label">Scroll</span>
+          <span class="hero-scroll-line"></span>
+        </div>
+
+      </section>
+    </div><!-- /.hero-pin-wrapper -->
+
+    <!-- ═══════════════════════════════════════════════════════
+         PINNED HORIZONTAL STORYTELLING BAND
+         
+         4 panels: What We Build · Why It Matters · Process · FAQ
+         Desktop: pinned, scrolls horizontally via GSAP scrub
+         Mobile: vertical stacked sections, no pin
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="story-band-section" id="story-band" aria-label="Our story">
+
+      <!-- Panel navigation dots (desktop only) -->
+      <nav class="story-dots" aria-label="Story panel progress" aria-hidden="true">
+        <span class="story-dot active" data-index="0"></span>
+        <span class="story-dot" data-index="1"></span>
+        <span class="story-dot" data-index="2"></span>
+        <span class="story-dot" data-index="3"></span>
+      </nav>
+
+      <!-- The scrolling track -->
+      <div class="story-track" id="story-track">
+
+        <!-- ── Panel 1: What We Build ──────────────────────── -->
+        <div class="story-panel" data-panel="1" aria-labelledby="panel-build">
+          <div class="story-panel-inner">
+            <div class="story-panel-content container">
+
+              <div class="story-panel-header">
+                <p class="story-eyebrow">What we build</p>
+                <h2 class="story-heading" id="panel-build">
+                  Four clear paths.<br>All built around your business
+                </h2>
+                <p class="story-subheading">
+                  Every project starts with a conversation. These are the ways most businesses work with us — wherever you land, the process is clear and focused on real results.
+                </p>
+              </div>
+
+              <div class="services-grid services-grid--band">
+
+                <article class="service-card" aria-labelledby="lane-launch-b">
+                  <div class="service-card-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                    </svg>
+                  </div>
+                  <p class="service-card-label">Lane 01</p>
+                  <h3 class="service-card-title" id="lane-launch-b">Launch</h3>
+                  <p class="service-card-who">For businesses starting something new and needing a website or lightweight web app.</p>
+                  <ul class="service-card-bullets" role="list">
+                    <li>A site that makes the right first impression, every time</li>
+                    <li>Clear next steps so customers know how to reach you</li>
+                    <li>Simple intake so people actually contact you</li>
+                  </ul>
+                </article>
+
+                <article class="service-card" aria-labelledby="lane-upgrade-b">
+                  <div class="service-card-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                      <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+                    </svg>
+                  </div>
+                  <p class="service-card-label">Lane 02</p>
+                  <h3 class="service-card-title" id="lane-upgrade-b">Upgrade</h3>
+                  <p class="service-card-who">For businesses whose current site no longer fits where they're headed.</p>
+                  <ul class="service-card-bullets" role="list">
+                    <li>A site that matches the quality of your work</li>
+                    <li>Better conversion — more visitors become real leads</li>
+                    <li>Ready to support the next stage of your business</li>
+                  </ul>
+                </article>
+
+                <article class="service-card" aria-labelledby="lane-automate-b">
+                  <div class="service-card-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/>
+                      <path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/>
+                      <path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>
+                    </svg>
+                  </div>
+                  <p class="service-card-label">Lane 03</p>
+                  <h3 class="service-card-title" id="lane-automate-b">Automate</h3>
+                  <p class="service-card-who">For businesses that want AI or smart workflows integrated into their existing operations.</p>
+                  <ul class="service-card-bullets" role="list">
+                    <li>Follow-ups that don't get lost in your inbox</li>
+                    <li>Workflows that keep running even when you're not</li>
+                    <li>AI tools integrated into what you already use</li>
+                  </ul>
+                </article>
+
+                <article class="service-card" aria-labelledby="lane-custom-b">
+                  <div class="service-card-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                    </svg>
+                  </div>
+                  <p class="service-card-label">Lane 04</p>
+                  <h3 class="service-card-title" id="lane-custom-b">Customization</h3>
+                  <p class="service-card-who">For businesses with a specific challenge that doesn't fit neatly into one category.</p>
+                  <ul class="service-card-bullets" role="list">
+                    <li>Flexible problem-solving shaped around your situation</li>
+                    <li>A plan built from your actual needs, not a template</li>
+                    <li>The right outcome — however we need to get there</li>
+                  </ul>
+                </article>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Panel 2: Why It Matters ─────────────────────── -->
+        <div class="story-panel" data-panel="2" aria-labelledby="panel-matters">
+          <div class="story-panel-inner">
+            <div class="story-panel-content container">
+
+              <div class="story-panel-header">
+                <p class="story-eyebrow">Why it matters</p>
+                <h2 class="story-heading" id="panel-matters">
+                  What good technology actually does for your business
+                </h2>
+                <p class="story-subheading">
+                  The right tools don't just look good — they do real work while you're busy running things.
+                </p>
+              </div>
+
+              <div class="outcomes-grid--band">
+
+                <div class="outcome-card">
+                  <div class="outcome-card-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="outcome-card-title">A stronger first impression</h3>
+                    <p class="outcome-card-body">Your website is often the first thing a potential customer sees. It should immediately reflect the quality you deliver in person.</p>
+                  </div>
+                </div>
+
+                <div class="outcome-card">
+                  <div class="outcome-card-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="outcome-card-title">More clarity for customers</h3>
+                    <p class="outcome-card-body">When visitors understand what you do and what to do next, they reach out. Clear sites bring in more of the right people.</p>
+                  </div>
+                </div>
+
+                <div class="outcome-card">
+                  <div class="outcome-card-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M8.7 3A6 6 0 0 1 18 8a21.3 21.3 0 0 0 .6 5"/><path d="M17 17H3s3-2 3-9a4.67 4.67 0 0 1 .3-1.7"/>
+                      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="m2 2 20 20"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="outcome-card-title">Fewer missed opportunities</h3>
+                    <p class="outcome-card-body">A well-built site and smart follow-up system means leads don't slip away when you're busy running the business.</p>
+                  </div>
+                </div>
+
+                <div class="outcome-card">
+                  <div class="outcome-card-icon" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="outcome-card-title">Less manual back-and-forth</h3>
+                    <p class="outcome-card-body">Smart systems take care of repetitive tasks — so you spend your time on work that actually needs you.</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div style="margin-top:var(--space-10);">
+                <a href="#contact" class="btn btn-outline">Tell me what you're building</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Panel 3: How We Build It Together ───────────── -->
+        <div class="story-panel" data-panel="3" aria-labelledby="panel-process">
+          <div class="story-panel-inner">
+            <div class="story-panel-content container">
+
+              <div class="story-panel-header">
+                <p class="story-eyebrow">How it works</p>
+                <h2 class="story-heading" id="panel-process">
+                  How we build it together
+                </h2>
+                <p class="story-subheading">
+                  This isn't something we throw over the wall. Every step involves you — from the first conversation to the day you launch.
+                </p>
+              </div>
+
+              <div class="process-steps--band">
+
+                <div class="process-step--band">
+                  <div class="process-step-number" aria-hidden="true">01</div>
+                  <h3 class="process-step-title">Tell me what you're building</h3>
+                  <p class="process-step-body">Fill out the intake form and we'll set up a quick call to go over what you want to build. No pressure — just a conversation.</p>
+                </div>
+
+                <div class="process-step--band">
+                  <div class="process-step-number" aria-hidden="true">02</div>
+                  <h3 class="process-step-title">Shape the plan</h3>
+                  <p class="process-step-body">We map out scope, milestones, and pricing together. You know exactly what you're getting before any work starts.</p>
+                </div>
+
+                <div class="process-step--band">
+                  <div class="process-step-number" aria-hidden="true">03</div>
+                  <h3 class="process-step-title">Build, review, and refine</h3>
+                  <p class="process-step-body">You see the work in a functioning demo and give feedback before anything goes live. Your input shapes the final product.</p>
+                </div>
+
+                <div class="process-step--band">
+                  <div class="process-step-number" aria-hidden="true">04</div>
+                  <h3 class="process-step-title">Launch, hand off, and support</h3>
+                  <p class="process-step-body">We launch when you're ready. Maintain it yourself, hand it off clean, or have us keep it running — whatever works for you.</p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Panel 4: FAQ ────────────────────────────────── -->
+        <div class="story-panel" data-panel="4" aria-labelledby="panel-faq" id="faq">
+          <div class="story-panel-inner">
+            <div class="story-panel-content container">
+
+              <div class="story-panel-header">
+                <p class="story-eyebrow">Common questions</p>
+                <h2 class="story-heading" id="panel-faq">
+                  Questions you probably have
+                </h2>
+                <p class="story-subheading">
+                  If something's not covered here, bring it up when you fill out the form.
+                </p>
+              </div>
+
+              <div class="faq-list--band" role="list">
+
+                <div class="faq-item" role="listitem">
+                  <button class="faq-question" aria-expanded="false">
+                    <span>How fast can we get started?</span>
+                    <span class="faq-question-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                      Once you submit the intake form, you'll hear back within 24–48 hours to set up a call. We'll go over what you want to build and figure out if we're a good fit — before committing to anything.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item" role="listitem">
+                  <button class="faq-question" aria-expanded="false">
+                    <span>How does pricing work?</span>
+                    <span class="faq-question-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                      Everything is project-based with milestone payments. Typically: <strong style="color:var(--color-text)">40% upfront</strong> to reserve the project and start planning, <strong style="color:var(--color-text)">40% when the core build is ready</strong> in a working demo for your review, and <strong style="color:var(--color-text)">20% before final launch or handoff.</strong> No hidden fees, no surprises.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item" role="listitem">
+                  <button class="faq-question" aria-expanded="false">
+                    <span>What will I actually get at the end?</span>
+                    <span class="faq-question-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                      That's up to you. Some clients want to manage things themselves — we'll walk you through everything. Some want us to maintain it ongoing. Others want a clean handoff to their own team or a future hire. We build it so any of those paths works.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item" role="listitem">
+                  <button class="faq-question" aria-expanded="false">
+                    <span>Do you only work with Charleston businesses?</span>
+                    <span class="faq-question-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                      Charleston and the greater South Carolina area are home base, but the work is fully remote-friendly. If you're in SC and want to build something, let's talk. If you're outside SC and found us — reach out anyway and we'll see if it's a fit.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="faq-item" role="listitem">
+                  <button class="faq-question" aria-expanded="false">
+                    <span>Do you use AI in every project?</span>
+                    <span class="faq-question-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+                    </span>
+                  </button>
+                  <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                      Only where it actually makes sense. AI is a tool — not a buzzword. For some businesses it's genuinely powerful: automating follow-ups, building smart contact forms, sorting through your inbox. For others, a clean, fast website does the job perfectly well. We'll be honest about what helps and what doesn't.
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div style="margin-top:var(--space-10);">
+                <a href="#contact" class="btn btn-primary">Tell me what you're building</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.story-track -->
+    </section><!-- /.story-band-section -->
+
+    <div class="gradient-line" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CONTACT / INTAKE FORM — Vertical layout
+    ═══════════════════════════════════════════════════════════ -->
+    <section class="section contact" id="contact" aria-labelledby="contact-heading">
+      <div class="glow-orb glow-orb--primary" aria-hidden="true" style="top:-100px;right:-150px;"></div>
+
+      <div class="container">
+        <div class="contact-layout">
+
+          <div class="contact-intro">
+            <p class="section-eyebrow reveal">Let's talk</p>
+            <h2 class="section-heading reveal" id="contact-heading">
+              Tell me what you're building
+            </h2>
+            <p class="section-subheading reveal reveal-delay-1">
+              Fill in what you can. This is low-pressure — we'll figure out the details together on a short call. No commitment required.
+            </p>
+
+            <ul class="contact-trust reveal reveal-delay-2" role="list">
+              <li class="contact-trust-item">
+                <span class="contact-trust-dot" aria-hidden="true"></span>
+                Reply within 24–48 hours
+              </li>
+              <li class="contact-trust-item">
+                <span class="contact-trust-dot" aria-hidden="true"></span>
+                No sales pressure, just a conversation
+              </li>
+              <li class="contact-trust-item">
+                <span class="contact-trust-dot" aria-hidden="true"></span>
+                Based in Charleston, SC
+              </li>
+            </ul>
+          </div>
+
+          <!-- Form -->
+          <div class="reveal">
+
+            <!-- Success message -->
+            <div class="form-success" role="status" aria-live="polite">
+              <h3 class="form-success-heading">You're in.</h3>
+              <p class="form-success-body">
+                Expect a reply within 24–48 hours to set up a quick call.<br>
+                We'll go over what you want to build and see if it's a good fit. No commitment required.
+              </p>
+            </div>
+
+            <form id="contact-form" method="POST" novalidate aria-labelledby="contact-heading">
+              <div class="form-body">
+                <div class="form-grid">
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-name">
+                      Your name <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input type="text" id="field-name" name="name" class="form-input"
+                           placeholder="Jane Smith" autocomplete="name" required />
+                    <span class="form-field-error" id="error-name" role="alert"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-email">
+                      Email address <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input type="email" id="field-email" name="email" class="form-input"
+                           placeholder="jane@yourbusiness.com" autocomplete="email" required />
+                    <span class="form-field-error" id="error-email" role="alert"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-business">
+                      Business name <span class="required" aria-label="required">*</span>
+                    </label>
+                    <input type="text" id="field-business" name="business_name" class="form-input"
+                           placeholder="Smith &amp; Co." autocomplete="organization" required />
+                    <span class="form-field-error" id="error-business" role="alert"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-location">City / Location</label>
+                    <input type="text" id="field-location" name="location" class="form-input"
+                           placeholder="Charleston, SC" autocomplete="address-level2" />
+                  </div>
+
+                  <div class="form-group form-grid-full">
+                    <p class="form-label">What kind of project?</p>
+                    <div class="form-segments" role="group" aria-label="Project type">
+                      <input type="radio" name="project_type" id="type-launch"    class="form-segment-input" value="Launch" />
+                      <label class="form-segment-label" for="type-launch">Launch</label>
+
+                      <input type="radio" name="project_type" id="type-upgrade"   class="form-segment-input" value="Upgrade" />
+                      <label class="form-segment-label" for="type-upgrade">Upgrade</label>
+
+                      <input type="radio" name="project_type" id="type-automate"  class="form-segment-input" value="Automate" />
+                      <label class="form-segment-label" for="type-automate">Automate</label>
+
+                      <input type="radio" name="project_type" id="type-custom"    class="form-segment-input" value="Customization" />
+                      <label class="form-segment-label" for="type-custom">Customization</label>
+
+                      <input type="radio" name="project_type" id="type-notsure"   class="form-segment-input" value="Not sure yet" />
+                      <label class="form-segment-label" for="type-notsure">Not sure yet</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group form-grid-full">
+                    <label class="form-label" for="field-description">
+                      What are you building or improving? <span class="required" aria-label="required">*</span>
+                    </label>
+                    <textarea id="field-description" name="description" class="form-textarea" rows="4"
+                      placeholder="Describe what you're working on — a new website, an existing one that needs help, something you want to automate, or a specific challenge you're trying to solve." required></textarea>
+                    <span class="form-field-error" id="error-description" role="alert"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-timeline">Timeline (optional)</label>
+                    <input type="text" id="field-timeline" name="timeline" class="form-input"
+                           placeholder="e.g. Need it live in 6 weeks" />
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="field-budget">Budget range (optional)</label>
+                    <input type="text" id="field-budget" name="budget" class="form-input"
+                           placeholder="e.g. $2k–5k, or not sure yet" />
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="form-footer" style="margin-top:var(--space-6);">
+                <div class="form-error-global" id="form-error-global" role="alert"></div>
+
+                <button type="submit" class="btn btn-primary form-submit">
+                  <span class="btn-label">Tell me what you're building</span>
+                  <span class="spinner" aria-hidden="true"></span>
+                </button>
+
+                <p style="font-size:var(--text-xs);color:var(--color-text-faint);line-height:1.6;">
+                  Your information is used only to follow up about your project. No spam, no lists.
+                </p>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <!-- Official horizontal lockup in footer -->
+          <img src="assets/logos/haki_tools_horizontal.svg" alt="Haki Tools" height="24" style="width:auto;height:24px;" />
+        </div>
+        <p class="footer-location">Charleston, South Carolina</p>
+        <p class="footer-copyright">
+          &copy; <span id="footer-year"></span> Haki Tools. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════════════════════════ -->
+  <script src="config/site.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/hero-particles.js"></script>
+  <script src="js/horizontal.js"></script>
+  <script src="js/form.js"></script>
+
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+/* ============================================================
+   HAKI TOOLS — Design Tokens (v3)
+   Brand green sourced from official haki_tools_green.svg: #9ee2bf
+   To change the accent color: update --color-green and derived values
+   ============================================================ */
+
+:root {
+  /* ── Type Scale (fluid) ─────────────────────────────────── */
+  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(1.8rem,   1.0rem  + 2.2vw,  3.2rem);
+  --text-3xl:  clamp(2.25rem,  1.0rem  + 3.5vw,  4.25rem);
+  --text-hero: clamp(2.5rem,   0.8rem  + 5vw,    6rem);
+
+  /* ── Spacing System (4px base) ──────────────────────────── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ── Brand Colors ───────────────────────────────────────── */
+  /* Primary accent — Haki Tools official brand green #9ee2bf (from haki_tools_green.svg) */
+  --color-green:          #9ee2bf;
+  --color-green-dark:     #82d4a9;
+  --color-green-deeper:   #6bc495;
+  --color-green-light:    #b8ecd0;
+  --color-green-glow:     rgba(158, 226, 191, 0.14);
+  --color-green-glow-sm:  rgba(158, 226, 191, 0.07);
+
+  /* Legacy aliases */
+  --color-mint:           #9ee2bf;
+  --color-mint-dark:      #82d4a9;
+  --color-mint-light:     #b8ecd0;
+  --color-mint-glow:      rgba(158, 226, 191, 0.14);
+  --color-mint-glow-sm:   rgba(158, 226, 191, 0.07);
+
+  /* Dark theme surfaces */
+  --color-bg:             #080e0b;
+  --color-surface:        #0c1410;
+  --color-surface-2:      #111a16;
+  --color-surface-3:      #16221c;
+  --color-surface-card:   #0f1812;
+  --color-border:         rgba(158, 226, 191, 0.12);
+  --color-border-subtle:  rgba(255, 255, 255, 0.07);
+  --color-divider:        rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --color-text:           #eaf2ee;
+  --color-text-muted:     #8aaa98;
+  --color-text-faint:     #466055;
+  --color-text-inverse:   #080e0b;
+
+  /* Semantic */
+  --color-error:          #e05c6e;
+  --color-success:        #9ee2bf;
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-display: 'Clash Display', 'Cabinet Grotesk', system-ui, sans-serif;
+  --font-body:    'Satoshi', 'General Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Border Radius ──────────────────────────────────────── */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ────────────────────────────────────────────── */
+  --shadow-sm:    0 1px 2px rgba(0,0,0,0.5);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.6);
+  --shadow-lg:    0 12px 40px rgba(0,0,0,0.7);
+  --shadow-green: 0 0 30px rgba(158, 226, 191, 0.18), 0 0 60px rgba(158, 226, 191, 0.07);
+
+  /* ── Transitions ────────────────────────────────────────── */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth:      300ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Content Widths ─────────────────────────────────────── */
+  --content-narrow:  640px;
+  --content-default: 960px;
+  --content-wide:    1200px;
+  --content-full:    100%;
+}
+
+/* ── Prefers Reduced Motion ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

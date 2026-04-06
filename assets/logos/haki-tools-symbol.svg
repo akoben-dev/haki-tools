@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 450" fill="none" aria-label="Haki Tools logo mark">
+  <!--
+    Haki Tools gem mark. Color: #86D4A3 (from uploaded brand assets)
+    
+    The logo is a OUTLINED gem shape (not solidly filled) —
+    the gem frame and the H monogram inside are both solid green strokes/fills
+    against a transparent/white background, creating negative-space windows.
+    
+    Structure:
+    - Outer diamond/gem outline (thick stroke frame)
+    - Inner H-double monogram (two adjacent H shapes)
+    - All rendered as filled paths with white cutouts between sections
+  -->
+
+  <style>
+    .brand { fill: #86D4A3; }
+  </style>
+
+  <!--
+    We'll use the "even-odd" fill rule approach:
+    Draw outer gem, then subtract inner negative spaces.
+    
+    Gem proportions from logo:
+    - Width ~500, Height ~450
+    - Flat top at y=20
+    - Left top corner at ~x=118, y=20; right at ~x=382, y=20
+    - Left tip at ~x=30, y=195; right tip ~x=470, y=195
+    - Bottom point at x=250, y=435
+    - Top-left bevel corner between flat top and left side: ~x=70, y=120
+    - Top-right bevel corner: ~x=430, y=120
+    
+    H monogram inner structure:
+    Two adjacent H shapes, sharing the space between them.
+    - Outer left of left H at x=118, inner right of right H at x=382
+    - Left H left bar: x=118–158, Right H right bar: x=342–382
+    - Left H right bar / Right H left bar overlap in center: x=218–282
+    - Crossbar at roughly y=210–250
+    - Top of H area: y=80, bottom: y=360
+  -->
+
+  <!-- Use fill-rule evenodd to punch holes -->
+  <path fill="#86D4A3" fill-rule="evenodd" d="
+    M 118,20
+    L 382,20
+    L 460,130
+    L 480,180
+    L 250,435
+    L 20,180
+    L 40,130
+    Z
+
+    M 118,80 L 158,80 L 158,195 L 218,195 L 218,80 L 282,80 L 282,195 L 342,195 L 342,80 L 382,80 L 382,370 L 342,370 L 342,255 L 282,255 L 282,370 L 218,370 L 218,255 L 158,255 L 158,370 L 118,370 Z
+  "/>
+
+</svg>

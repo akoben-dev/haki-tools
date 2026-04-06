@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#080c0c"/>
+  <!-- Background gradient orb -->
+  <radialGradient id="g1" cx="50%" cy="40%" r="60%">
+    <stop offset="0%" stop-color="#4ECDC4" stop-opacity="0.12"/>
+    <stop offset="100%" stop-color="#4ECDC4" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#g1)"/>
+
+  <!-- Logo mark (H) -->
+  <rect x="480" y="185" width="28" height="140" rx="4" fill="#4ECDC4"/>
+  <rect x="692" y="185" width="28" height="140" rx="4" fill="#4ECDC4"/>
+  <rect x="480" y="242" width="240" height="28" rx="4" fill="#4ECDC4"/>
+
+  <!-- Wordmark -->
+  <text x="600" y="405" font-family="system-ui, sans-serif" font-size="48" font-weight="700" fill="#e8f0ef" text-anchor="middle" letter-spacing="-1">Haki Tools</text>
+
+  <!-- Tagline -->
+  <text x="600" y="455" font-family="system-ui, sans-serif" font-size="22" fill="#8aaba8" text-anchor="middle" letter-spacing="0.5">Technology to better your business.</text>
+
+  <!-- Location -->
+  <text x="600" y="510" font-family="system-ui, sans-serif" font-size="16" fill="#4a6664" text-anchor="middle" letter-spacing="2">CHARLESTON, SOUTH CAROLINA</text>
+</svg>

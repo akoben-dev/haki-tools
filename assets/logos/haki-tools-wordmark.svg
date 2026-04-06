@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 48" fill="none" aria-label="Haki Tools wordmark">
+  <!-- Symbol (H mark) -->
+  <!-- Left vertical -->
+  <rect x="4" y="8" width="5" height="32" rx="1" fill="#4ECDC4"/>
+  <!-- Right vertical -->
+  <rect x="23" y="8" width="5" height="32" rx="1" fill="#4ECDC4"/>
+  <!-- Crossbar -->
+  <rect x="4" y="21" width="24" height="5" rx="1" fill="#4ECDC4"/>
+
+  <!-- "HAKI TOOLS" wordmark -->
+  <!-- Using geometric letterforms drawn with paths -->
+
+  <!-- H -->
+  <rect x="40" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="40" y="22" width="16" height="4" rx="1" fill="#e8f0ef"/>
+  <rect x="52" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+
+  <!-- A -->
+  <path d="M68 38 L76 10 L84 38" stroke="#e8f0ef" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="70.5" y1="28" x2="81.5" y2="28" stroke="#e8f0ef" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- K -->
+  <rect x="90" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <path d="M94 24 L106 10" stroke="#e8f0ef" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M94 24 L106 38" stroke="#e8f0ef" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- I -->
+  <rect x="112" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+
+  <!-- dot / separator -->
+  <circle cx="126" cy="37" r="2.5" fill="#4ECDC4"/>
+
+  <!-- T -->
+  <rect x="133" y="10" width="20" height="4" rx="1" fill="#e8f0ef"/>
+  <rect x="141" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+
+  <!-- O -->
+  <rect x="159" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="179" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="159" y="10" width="24" height="4" rx="1" fill="#e8f0ef"/>
+  <rect x="159" y="34" width="24" height="4" rx="1" fill="#e8f0ef"/>
+
+  <!-- O -->
+  <rect x="189" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="209" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="189" y="10" width="24" height="4" rx="1" fill="#e8f0ef"/>
+  <rect x="189" y="34" width="24" height="4" rx="1" fill="#e8f0ef"/>
+
+  <!-- L -->
+  <rect x="219" y="10" width="4" height="28" rx="1" fill="#e8f0ef"/>
+  <rect x="219" y="34" width="18" height="4" rx="1" fill="#e8f0ef"/>
+
+  <!-- S -->
+  <path d="M245 14 Q245 10 253 10 Q261 10 261 16 Q261 22 253 24 Q245 26 245 32 Q245 38 253 38 Q261 38 261 34" stroke="#e8f0ef" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>
