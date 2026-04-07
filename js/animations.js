@@ -77,8 +77,6 @@
         }
       });
     }
-    // Story-dots and band pin managed by horizontal.js
-
     // ── Glow orb parallax ─────────────────────────────────────
     gsap.utils.toArray('.glow-orb').forEach(orb => {
       gsap.to(orb, {
