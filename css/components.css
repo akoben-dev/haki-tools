@@ -353,6 +353,8 @@
   position: relative;
   /* No overflow:hidden here — it clips content */
   background: var(--color-bg);
+  /* Clear the fixed nav (~68px) when scrolled to via anchor */
+  scroll-margin-top: var(--space-20);
 }
 
 /* The horizontal scrolling track — 4 panels × 100vw each */
@@ -380,6 +382,7 @@
   border-right: 1px solid var(--color-border-subtle);
   position: relative;
   /* overflow:hidden REMOVED — it was cutting off bottom content */
+  scroll-margin-top: var(--space-20); /* clear fixed nav on anchor scroll */
 }
 
 /* Alternating surface tint for visual separation */
@@ -399,10 +402,10 @@
 
 .story-panel-inner {
   width: 100%;
-  /* Generous vertical padding so content has room to breathe.
-     On desktops with pinning, the panel is 100vh tall —
-     content must fit. If it doesn't, the grid below collapses. */
-  padding-top: clamp(var(--space-10), 6vh, var(--space-16));
+  /* Top padding must clear the fixed nav (~68px) plus breathing room.
+     Minimum 80px ensures the section title is never hidden behind the header.
+     Bottom padding kept modest to maximise content area per panel. */
+  padding-top: clamp(var(--space-20), 10vh, var(--space-24));
   padding-bottom: clamp(var(--space-10), 6vh, var(--space-16));
   /* Allow overflow to show if content is taller than viewport */
   overflow: visible;
