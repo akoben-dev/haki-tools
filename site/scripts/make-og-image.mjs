@@ -11,7 +11,7 @@ body{margin:0;width:1200px;height:630px;background:radial-gradient(700px 500px a
 .m{width:360px;flex:none;filter:drop-shadow(0 0 40px rgba(158,226,191,.35))}
 h1{color:#e8f1ec;font-size:76px;line-height:1;letter-spacing:-.03em;margin:0;font-weight:600}
 p{color:#9ee2bf;font-size:26px;margin:28px 0 0;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
-</style></head><body><div class="m">${mark}</div><div><h1>Technology to better your business.</h1><p>Haki Tools · Charleston, SC</p></div></body></html>`;
+</style></head><body><div class="m">${mark}</div><div><h1>Technology to better your business.</h1><p>Haki Tools · Maryland · US-wide</p></div></body></html>`;
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 await page.setContent(html);

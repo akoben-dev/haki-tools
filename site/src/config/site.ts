@@ -6,8 +6,9 @@ export const site = {
   url: 'https://haki.tools',
   tagline: 'Technology to better your business.',
   description:
-    'Haki Tools helps Charleston-area small businesses launch websites, upgrade their online presence, and automate workflows with AI where it genuinely helps.',
-  location: 'Charleston, South Carolina',
+    'Haki Tools helps small businesses across the US launch websites, upgrade their online presence, and automate workflows with AI where it genuinely helps. Based in Maryland.',
+  location: 'Maryland',
+  locationLine: 'Based in Maryland, working with small businesses across the US.',
   // Shown only if the form fails to send, so a visitor can still reach you.
   fallbackEmail: 'robbie.robinson@akoben.ai',
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT || '/api/contact',

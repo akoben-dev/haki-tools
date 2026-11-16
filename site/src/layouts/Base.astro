@@ -15,7 +15,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description = site.description, keyframes, initialStage = 1, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Websites and AI automation | Charleston, SC`;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Websites and AI automation for small businesses`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -24,8 +24,8 @@ const jsonLd = {
   legalName: site.legalName,
   url: site.url,
   description: site.description,
-  areaServed: 'Charleston, South Carolina',
-  address: { '@type': 'PostalAddress', addressLocality: 'Charleston', addressRegion: 'SC', addressCountry: 'US' },
+  areaServed: { '@type': 'Country', name: 'United States' },
+  address: { '@type': 'PostalAddress', addressRegion: 'MD', addressCountry: 'US' },
 };
 ---
 <!doctype html>
