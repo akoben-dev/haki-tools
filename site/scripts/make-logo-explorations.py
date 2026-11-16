@@ -33,10 +33,29 @@ B = dict(w=320, h=400, subs=[poly([(0,173.3),(100,106.7),(100,250),(220,170),(22
 C = dict(w=320, h=400, subs=[[('M',0,50),('A',50,0,1,100,50),('L',100,163.94),('A',70,0,1,220,163.94),('L',220,50),('A',50,0,1,320,50),
       ('L',320,350),('A',50,0,1,220,350),('L',220,236.06),('A',70,0,1,100,236.06),('L',100,350),('A',50,0,1,0,350)]])
 
+
+# Round 2 (Everett, 2026-11-15: keep the H and T overlapping, as in today's gem).
+
+# D · HT Gem: today's idea, redrawn bold. The gem's top table is the T's bar and the centre column its stem;
+# the two side facets are the H's stems, tied to the T stem by the H crossbar.
+D = dict(w=440, h=400, subs=[poly([(110,0),(330,0),(400,70),(244,70),(244,196),(268,196),(268,92),(422,92),(440,110),
+      (268,336.7),(268,244),(244,244),(244,368.4),(220,400),(196,368.4),(196,244),(172,244),(172,336.7),(0,110),
+      (18,92),(172,92),(172,196),(196,196),(196,70),(40,70)])])
+
+# E · HT Gate: no gem. A T whose bar overhangs an H; the T stem runs down through the H crossbar.
+E = dict(w=400, h=400, subs=[poly([(0,0),(400,0),(400,72),(236,72),(236,214),(300,214),(300,100),(380,100),(380,400),
+      (300,400),(300,274),(236,274),(236,400),(164,400),(164,274),(100,274),(100,400),(20,400),(20,100),(100,100),
+      (100,214),(164,214),(164,72),(0,72)])])
+
+# F · Cut Gem HT: option A, but the solid T (top table + centre column) runs unbroken through the cut-out H.
+left = [(128,44),(164,44),(164,138),(196,138),(196,182),(164,182),(164,259.8),(100,175.6),(100,72)]
+right = [(440-x,y) for x,y in left][::-1]
+F = dict(w=440, h=400, subs=[poly(gem), poly(left[::-1]), poly(right[::-1])])
+
 hz = open(os.path.join(site, 'src/assets/brand/haki-horizontal.svg')).read()
 letters = re.findall(r'<path class="cls-1" d="([^"]+)"', hz)[1:]  # drop the old mark, keep the HAKI TOOLS letters
 
-for name, m in dict(a=A, b=B, c=C).items():
+for name, m in dict(a=A, b=B, c=C, d=D, e=E, f=F).items():
     d = to_d(m['subs'])
     open(f'{out}/{name}.svg','w').write(
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {m["w"]} {m["h"]}">\n  <path fill="{G}" fill-rule="evenodd" d="{d}"/>\n</svg>\n')
