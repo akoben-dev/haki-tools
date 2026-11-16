@@ -1,0 +1,20 @@
+---
+import { getEntry } from 'astro:content';
+const text = (await getEntry('copy', 'statement'))!.data.statement ?? '';
+// "*word*" marks an accent word.
+const words = text.split(/\s+/).map((w) => {
+  const m = /^\*(.+)\*([^*]*)$/.exec(w);
+  return m ? { accent: m[1], rest: m[2] } : { plain: w };
+});
+---
+<section class="statement" data-words aria-label="Our approach">
+  <div class="statement-sticky">
+    <div class="wrap">
+      <p class="statement-text">
+        {words.map((w) => (
+          <>{w.plain !== undefined ? <span class="word">{w.plain}</span> : <span class="word"><em>{w.accent}</em>{w.rest}</span>}{' '}</>
+        ))}
+      </p>
+    </div>
+  </div>
+</section>

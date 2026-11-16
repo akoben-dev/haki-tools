@@ -1,0 +1,56 @@
+{
+  "hero": {
+    "eyebrow": "Charleston, South Carolina",
+    "heading": "Technology to better your business.",
+    "body": "Haki Tools helps Charleston-area businesses launch websites, upgrade their online presence, and automate the busy work, so you can focus on what actually matters.",
+    "cta": {
+      "label": "Tell me what you're building",
+      "href": "#contact"
+    },
+    "secondaryCta": {
+      "label": "See what we build",
+      "href": "#services"
+    }
+  },
+  "statement": {
+    "statement": "The right tools don't just look good. They do real *work* while you're busy running things."
+  },
+  "services": {
+    "eyebrow": "What we build",
+    "heading": "Four clear paths. All built around your business.",
+    "body": "Every project starts with a conversation. These are the ways most businesses work with us. Wherever you land, the process is clear and focused on real results.",
+    "cta": {
+      "label": "Tell me what you're building",
+      "href": "/#contact"
+    }
+  },
+  "outcomes": {
+    "eyebrow": "Why it matters",
+    "heading": "What good technology actually does for your business."
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "heading": "How we build it together.",
+    "body": "This isn't something we throw over the wall. Every step involves you, from the first conversation to the day you launch."
+  },
+  "faq": {
+    "eyebrow": "Common questions",
+    "heading": "Questions you probably have.",
+    "body": "If something's not covered here, bring it up when you fill out the form."
+  },
+  "contact": {
+    "eyebrow": "Let's talk",
+    "heading": "Tell me what you're building.",
+    "body": "Fill in what you can. This is low-pressure: we'll figure out the details together on a short call. No commitment required.",
+    "trust": [
+      "Reply within 24–48 hours",
+      "No sales pressure, just a conversation",
+      "Based in Charleston, SC"
+    ],
+    "success": {
+      "heading": "You're in.",
+      "body": "Expect a reply within 24–48 hours to set up a quick call. We'll go over what you want to build and see if it's a good fit. No commitment required."
+    },
+    "privacyNote": "Your information is used only to follow up about your project. No spam, no lists."
+  }
+}

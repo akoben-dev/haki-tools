@@ -1,0 +1,22 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+const copy = (await getEntry('copy', 'faq'))!.data;
+const items = (await getCollection('faq')).sort((a, b) => a.data.order - b.data.order);
+---
+<section class="section" id="faq" aria-labelledby="faq-heading">
+  <div class="wrap faq-grid">
+    <div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2 id="faq-heading" class="display" data-reveal="display">{copy.heading}</h2>
+      <p class="lede" data-reveal>{copy.body}</p>
+    </div>
+    <div class="faq-list" data-reveal>
+      {items.map((it) => (
+        <details class="faq-item">
+          <summary>{it.data.question}</summary>
+          <p>{it.data.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

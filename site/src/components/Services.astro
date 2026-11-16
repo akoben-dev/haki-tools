@@ -1,0 +1,26 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+interface Props { stageBase: number }
+const { stageBase } = Astro.props;
+const copy = (await getEntry('copy', 'services'))!.data;
+const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+---
+<section class="services" id="services" data-services data-stage-base={stageBase} aria-labelledby="services-heading">
+  <div class="wrap section services-intro" data-services-intro>
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="services-heading" class="display" data-reveal="display">{copy.heading}</h2>
+    <p class="lede" data-reveal>{copy.body}</p>
+  </div>
+  <div class="track" data-track>
+    {lanes.map((lane, i) => (
+      <article class="lane" data-lane id={`lane-${lane.id}`} aria-labelledby={`lane-${lane.id}-title`}>
+        <span class="lane-number" aria-hidden="true">{lane.data.lane}</span>
+        <h3 id={`lane-${lane.id}-title`}>{lane.data.title}</h3>
+        <p class="who">{lane.data.who}</p>
+        <ul class="ticks">{lane.data.bullets.map((b) => <li>{b}</li>)}</ul>
+        <a class="lane-link" href={`/services#${lane.id}`}>More about {lane.data.title} <span aria-hidden="true">→</span></a>
+        <div class="lane-progress" aria-hidden="true">{String(i + 1).padStart(2, '0')} / {String(lanes.length).padStart(2, '0')}</div>
+      </article>
+    ))}
+  </div>
+</section>

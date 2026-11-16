@@ -1,0 +1,22 @@
+---
+import { site } from '../config/site';
+import { inlineSvg } from '../lib/svg';
+import wordmark from '../assets/brand/haki-horizontal.svg?raw';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="site-header">
+  <a class="brand" href="/" aria-label={`${site.name}, home`} set:html={inlineSvg(wordmark, site.name)} />
+  <nav class="site-nav" aria-label="Main">
+    <ul>
+      {site.nav.map((l) => (
+        <li><a href={l.href} aria-current={l.href === path ? 'page' : undefined}>{l.label}</a></li>
+      ))}
+    </ul>
+    <a class="btn btn-primary" href={site.cta.href}>{site.cta.label}</a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-button>Menu</button>
+  </nav>
+</header>
+<div class="mobile-menu" id="mobile-menu" hidden>
+  {site.nav.map((l) => <a href={l.href}>{l.label}</a>)}
+  <a class="btn btn-primary" href={site.cta.href}>{site.cta.label}</a>
+</div>

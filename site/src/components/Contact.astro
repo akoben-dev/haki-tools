@@ -1,0 +1,86 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { site } from '../config/site';
+interface Props { stageFrom?: number; stageTo?: number }
+const { stageFrom, stageTo } = Astro.props;
+const copy = (await getEntry('copy', 'contact'))!.data;
+const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const stageAttrs = stageFrom !== undefined
+  ? { 'data-stage-from': stageFrom, 'data-stage-to': stageTo, 'data-stage-start': 'top bottom', 'data-stage-end': 'top 15%' }
+  : {};
+---
+<section class="section" id="contact" aria-labelledby="contact-heading" {...stageAttrs}>
+  <div class="wrap contact-grid">
+    <div>
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2 id="contact-heading" class="display" data-reveal="display">{copy.heading}</h2>
+      <p class="lede" data-reveal>{copy.body}</p>
+      <ul class="trust" data-reveal>{copy.trust?.map((t) => <li>{t}</li>)}</ul>
+    </div>
+    <div class="form-panel" data-reveal>
+      <form method="post" action={site.formEndpoint} data-contact-form data-fallback-email={site.fallbackEmail} aria-describedby="form-note">
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" autocomplete="name" required maxlength="120" />
+            <p class="field-error" data-error-for="name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Email address</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="200" />
+            <p class="field-error" data-error-for="email" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-business">Business name</label>
+            <input id="f-business" name="business_name" autocomplete="organization" required maxlength="160" />
+            <p class="field-error" data-error-for="business_name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-location">City / location <span class="opt">(optional)</span></label>
+            <input id="f-location" name="location" autocomplete="address-level2" maxlength="120" />
+          </div>
+          <fieldset class="field span-2">
+            <legend>What kind of project?</legend>
+            <div class="chips">
+              {lanes.map((l) => (
+                <label class="chip"><input type="radio" name="project_type" value={l.data.title} /><span>{l.data.title}</span></label>
+              ))}
+              <label class="chip"><input type="radio" name="project_type" value="Not sure yet" checked /><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+          <div class="field span-2">
+            <label for="f-description">What are you building or improving?</label>
+            <textarea id="f-description" name="description" required minlength="10" maxlength="5000"></textarea>
+            <p class="field-error" data-error-for="description" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-timeline">Timeline <span class="opt">(optional)</span></label>
+            <input id="f-timeline" name="timeline" maxlength="120" />
+          </div>
+          <div class="field">
+            <label for="f-budget">Budget range <span class="opt">(optional)</span></label>
+            <input id="f-budget" name="budget" maxlength="120" />
+          </div>
+          <!-- Spam traps: humans never see or fill these. -->
+          <div class="hp" aria-hidden="true">
+            <label for="f-website">Leave this empty</label>
+            <input id="f-website" name="company_website" tabindex="-1" autocomplete="off" />
+          </div>
+          <input type="hidden" name="started_at" value="" />
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-primary" type="submit">{site.cta.label} <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+        </div>
+        <p class="form-note" id="form-note">{copy.privacyNote} See our <a href="/privacy">privacy policy</a>.</p>
+      </form>
+      <div class="form-success" data-form-success tabindex="-1" hidden>
+        <h3>{copy.success?.heading}</h3>
+        <p>{copy.success?.body}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import '../scripts/form';
+</script>

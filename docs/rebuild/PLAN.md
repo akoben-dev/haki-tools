@@ -1,6 +1,6 @@
 # Haki Tools rebuild: plan (Step 1 of the Rebuild Brief)
 
-Status: **approved by Everett 2026-11-15**; slice S1 in progress. No AWS resources created yet.
+Status: **approved by Everett 2026-11-15**. Slice S1 built in `site/` (PR #2); no AWS resources created yet.
 Related docs: [CURRENT-STATE.md](CURRENT-STATE.md) (which copy is current, decisions, DNS baseline), [HOSTING-AND-COSTS.md](HOSTING-AND-COSTS.md) (every AWS resource with its monthly cost, for item-by-item approval), [AWS-ACCOUNT-SETUP.md](AWS-ACCOUNT-SETUP.md) (click-by-click setup of the new member account).
 
 ---

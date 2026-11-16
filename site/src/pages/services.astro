@@ -1,0 +1,49 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { servicesKeyframes } from '../config/particles';
+import { site } from '../config/site';
+
+const copy = (await getEntry('copy', 'services'))!.data;
+const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(lanes.map((l) => render(l)));
+const { keyframes, cta } = servicesKeyframes(lanes.map((l) => l.data.particle));
+---
+<Base title="Services" description={copy.body} keyframes={keyframes} initialStage={1}>
+  <section class="hero" data-hero aria-labelledby="services-page-heading">
+    <div class="hero-inner">
+      <div data-hero-copy>
+        <p class="eyebrow" data-hero-item>{copy.eyebrow}</p>
+        <h1 id="services-page-heading" data-hero-item>{copy.heading}</h1>
+        <p class="lede" data-hero-item>{copy.body}</p>
+      </div>
+    </div>
+    <span class="scroll-cue" aria-hidden="true">Scroll</span>
+  </section>
+
+  {lanes.map((lane, i) => {
+    const Content = rendered[i].Content;
+    return (
+      <section class="service-block" id={lane.id} aria-labelledby={`${lane.id}-title`}
+        data-stage-from={1 + i} data-stage-to={2 + i} data-stage-start="top 80%" data-stage-end="top 25%">
+        <div class="wrap">
+          <article class="lane" data-reveal>
+            <span class="lane-number" aria-hidden="true">{lane.data.lane}</span>
+            <h2 id={`${lane.id}-title`}>{lane.data.title}</h2>
+            <p class="who">{lane.data.who}</p>
+            <div class="service-body"><Content /></div>
+            <ul class="ticks">{lane.data.bullets.map((b) => <li>{b}</li>)}</ul>
+          </article>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="service-block" aria-labelledby="services-cta" data-stage-from={cta - 1} data-stage-to={cta} data-stage-start="top 80%" data-stage-end="top 25%">
+    <div class="wrap">
+      <h2 id="services-cta" class="display" data-reveal="display">Not sure which one fits?</h2>
+      <p class="lede" data-reveal>That's what the first conversation is for. Tell us what you're working on and we'll point you to the right path.</p>
+      <p style="margin-top:32px" data-reveal><a class="btn btn-primary" href={site.cta.href}>{site.cta.label} <span class="arrow" aria-hidden="true">→</span></a></p>
+    </div>
+  </section>
+</Base>
