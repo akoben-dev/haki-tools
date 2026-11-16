@@ -1,6 +1,8 @@
 // Non-secret site settings. Copy lives in src/content; motion settings in particles.ts.
 export const site = {
   name: 'Haki Tools',
+  // Registered entity (Maryland SDAT W27813740, formed 2026-11-13).
+  legalName: 'Haki Tools LLC',
   url: 'https://haki.tools',
   tagline: 'Technology to better your business.',
   description:

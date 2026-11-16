@@ -156,7 +156,7 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 
 **Open questions for Everett:**
 - Q1. ~~How does the VPS get new files today?~~ Answered 2026-11-15: Everett isn't sure, and wants to test locally and then serve from AWS, managed with Claude. So A5 stays: root files untouched until cutover.
-- Q2. Haki Tools' own privacy policy needs facts only you know: how long you keep form emails, whether you use any CRM, and the business's legal name and mailing address (if you want one shown).
+- Q2. Haki Tools' own privacy policy needs facts only you know: how long you keep form emails, whether you use any CRM, and a mailing address (if you want one shown). *Legal name answered 2026-11-16: **Haki Tools LLC**, a Maryland LLC (SDAT W27813740, formed 2026-11-13); now used in the footer, privacy policy and structured data.*
 - Q3. ~~GitHub Actions or Mac deploys?~~ Answered 2026-11-15: **GitHub Actions with OIDC, built in S2** (cost lines B9–B10). Local testing stays `npm run dev` / `npm run preview`.
 - Q4. ~~Which green?~~ Answered 2026-11-15: **`#9ee2bf`** (the logo file's mint) is the brand green for the logo, particles and UI accents.
 
