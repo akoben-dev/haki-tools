@@ -1,6 +1,6 @@
 # Haki Tools rebuild: plan (Step 1 of the Rebuild Brief)
 
-Status: **waiting for Everett's approval.** Nothing below has been built or created in AWS yet.
+Status: **approved by Everett 2026-11-15**; slice S1 in progress. No AWS resources created yet.
 Related docs: [CURRENT-STATE.md](CURRENT-STATE.md) (which copy is current, decisions, DNS baseline), [HOSTING-AND-COSTS.md](HOSTING-AND-COSTS.md) (every AWS resource with its monthly cost, for item-by-item approval), [AWS-ACCOUNT-SETUP.md](AWS-ACCOUNT-SETUP.md) (click-by-click setup of the new member account).
 
 ---
@@ -121,7 +121,7 @@ flowchart TB
   3. Switch the apex record and re-check every DNS record against the baseline.
   4. Watch it for 48 hours.
   5. Keep the VPS live for at least 7 days. Shutting it down is a separate decision for Everett.
-- **Deploys:** `npm run build` then `aws s3 sync --delete` then one CloudFront invalidation of `/*`, run from Everett's Mac with the `haki-tools` profile. GitHub Actions with OIDC (no stored keys) is an optional later slice.
+- **Deploys:** GitHub Actions (decided 2026-11-15). Each pull request runs a build check, and a merge to `main` that touches `site/` runs `npm run build`, then `aws s3 sync --delete`, then one CloudFront invalidation of `/*`. The workflow signs in through **GitHub OIDC**: a short-lived role limited to this repo's `main` branch, with no AWS keys stored in GitHub. The same commands can also run from the Mac with the `haki-tools` profile as a fallback.
 - **Cost guardrail:** an AWS Budget at $5/month with email alerts (budgets are free).
 
 Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-AND-COSTS.md). **Nothing is created until Everett approves that exact line.**
@@ -147,7 +147,7 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 ## 6. Assumptions and open questions
 
 **Assumptions** (Claude's choices where the brief is silent; change any of them):
-- A1. Brand: the green stays exactly as it is, and so does the dark background. **The logo itself is open to a redesign** (Everett, 2026-11-15). Slice 1 builds with today's mark (`haki_tools_green.svg`). A logo exploration (slice S1b) proposes 3 directions in the same green; whichever is approved becomes the SVG the particles sample, with no code change, since the morph target is just a path. Today the site's `#86D4A3` and the logo file's `#9ee2bf` differ slightly; Q4 settles which one is "the" green.
+- A1. Brand: the green (`#9ee2bf`, confirmed) stays exactly as it is, and so does the dark background. **The logo itself is open to a redesign** (Everett, 2026-11-15). Slice 1 builds with today's mark (`haki_tools_green.svg`). A logo exploration (slice S1b) proposes 3 directions in the same green; whichever is approved becomes the SVG the particles sample, with no code change, since the morph target is just a path. Today the site's `#86D4A3` and the logo file's `#9ee2bf` differ slightly; Q4 settles which one is "the" green.
 - A2. Type: one self-hosted variable display face plus a system/UI sans for body text. No Google Fonts request, which also means no third-party call to mention in the privacy policy. The exact face is proposed in slice 1.
 - A3. Pages: `/`, `/services`, `/privacy` (Haki Tools' own policy, needed because the form collects personal data), `/rvrmmo/privacy` (copied as-is from the RVRMMO repo with site chrome only), `/contact/thanks`, `/contact/error`, `404`, plus `robots.txt` and `sitemap.xml`. Canonical is `https://haki.tools`. No work or case-study page until there are real ones (the brief bans invented ones).
 - A4. No analytics and no cookies, so no cookie banner. This can be revisited.
@@ -155,10 +155,10 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 - A6. The content pass (aligning copy with HCPM: AI production-readiness audits, remediation, automation, websites) is its own slice after the build. Slice 1 ports today's business content as-is.
 
 **Open questions for Everett:**
-- Q1. How does the VPS get new files today: manual upload, or `git pull` on the server? (This decides whether A5's caution is required or just tidy.)
+- Q1. ~~How does the VPS get new files today?~~ Answered 2026-11-15: Everett isn't sure, and wants to test locally and then serve from AWS, managed with Claude. So A5 stays: root files untouched until cutover.
 - Q2. Haki Tools' own privacy policy needs facts only you know: how long you keep form emails, whether you use any CRM, and the business's legal name and mailing address (if you want one shown).
-- Q3. Do you want GitHub Actions deploys (OIDC) later, or are deploys from your Mac enough?
-- Q4. Which exact green is the brand: the logo file's `#9ee2bf` or the current site's `#86D4A3`?
+- Q3. ~~GitHub Actions or Mac deploys?~~ Answered 2026-11-15: **GitHub Actions with OIDC, built in S2** (cost lines B9–B10). Local testing stays `npm run dev` / `npm run preview`.
+- Q4. ~~Which green?~~ Answered 2026-11-15: **`#9ee2bf`** (the logo file's mint) is the brand green for the logo, particles and UI accents.
 
 ## Slices
 
@@ -166,8 +166,8 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 |---|---|---|
 | **S1** | Astro site in `site/`: content layer, every page with real HTML, particle engine with logo morph, scroll orchestrator, fallbacks, `/rvrmmo/privacy`, draft `/privacy`, 404, robots, sitemap. Verified locally on desktop and mobile viewports and on every fallback path. The form UI is built but not wired to a live endpoint. | This plan |
 | S1b | Logo exploration: 3 redrawn marks in the same green, as SVG, shown as particles and flat. The approved one replaces the morph target and favicon. | The chosen mark |
-| S2 | AWS account + Terraform: state, S3, CloudFront, ACM, function, headers, budget. Site served on the `cloudfront.net` name. | Cost lines A1–A3, B1–B8 |
+| S2 | AWS account + Terraform: state, S3, CloudFront, ACM, function, headers, budget. Site served on the `cloudfront.net` name. | Cost lines A1–A3, B1–B10 |
 | S3 | Contact backend: HTTP API + Lambda + SES + alarm. Real test submissions. | Cost lines C1–C6 |
 | S4 | DNS cutover at Namecheap (apex ALIAS); VPS stays as fallback | The cutover moment |
 | S5 | Content pass aligned with HCPM | The copy |
-| S6 | Optional: GitHub Actions OIDC deploys; remove old root files; VPS retirement | Each separately |
+| S6 | Remove old root files; VPS retirement | Each separately |

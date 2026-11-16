@@ -26,6 +26,8 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 | B6 | CloudFront cache policy + response-headers policy (HSTS, CSP, etc.) | Speed and security headers | $0 → $0 | Pending |
 | B7 | ACM public certificate for `haki.tools` + `www.haki.tools` | The HTTPS certificate; renews automatically | $0 → $0 | Pending |
 | B8 | CloudFront invalidations on deploy (`/*`) | Visitors see a new deploy at once | $0 (1,000 paths/month free) → $0 | Pending |
+| B9 | IAM OIDC identity provider for `token.actions.githubusercontent.com` | Lets GitHub Actions sign in to AWS without stored keys | $0 → $0 | Pending |
+| B10 | IAM role `haki-github-deploy` (trusts only `repo:akoben-dev/haki-tools:ref:refs/heads/main`; may only write the site bucket and invalidate the distribution) | The deploy workflow's narrow, short-lived permissions | $0 → $0 | Pending |
 
 **Subtotal B:** $0 inside the free tier, about $1.55/month worst case.
 
