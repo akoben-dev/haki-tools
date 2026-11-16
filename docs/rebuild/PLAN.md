@@ -165,7 +165,7 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 | Slice | What | Needs approval of |
 |---|---|---|
 | **S1** | Astro site in `site/`: content layer, every page with real HTML, particle engine with logo morph, scroll orchestrator, fallbacks, `/rvrmmo/privacy`, draft `/privacy`, 404, robots, sitemap. Verified locally on desktop and mobile viewports and on every fallback path. The form UI is built but not wired to a live endpoint. | This plan |
-| S1b | Logo exploration: 3 redrawn marks in the same green, as SVG, shown as particles and flat. The approved one replaces the morph target and favicon. | The chosen mark |
+| S1b | Logo exploration: 3 redrawn marks in the same green, as SVG, shown as particles and flat. The approved one replaces the morph target and favicon. | The chosen mark — **Done 2026-11-15: Everett picked D · HT Gem** (H and T overlapping in the gem, redrawn bold). All options in `site/src/assets/brand/explorations/`. |
 | S2 | AWS account + Terraform: state, S3, CloudFront, ACM, function, headers, budget. Site served on the `cloudfront.net` name. | Cost lines A1–A3, B1–B10 |
 | S3 | Contact backend: HTTP API + Lambda + SES + alarm. Real test submissions. | Cost lines C1–C6 |
 | S4 | DNS cutover at Namecheap (apex ALIAS); VPS stays as fallback | The cutover moment |
