@@ -10,24 +10,24 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 
 | ID | Item | What it is / why | Monthly cost (free tier → worst case) | Status |
 |---|---|---|---|---|
-| A1 | AWS Organizations member account `haki-tools` | Keeps the consulting business's bills, permissions and blast radius apart from RVRMMO | $0 → $0 | Pending |
-| A2 | IAM user `claude-haki-deployer` + access key in profile `haki-tools` (same pattern as `rvrmmo-s5`) | Lets Claude run Terraform and deploys from this Mac | $0 → $0 | Pending |
-| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | Pending |
+| A1 | AWS Organizations member account `haki-tools` | Keeps the consulting business's bills, permissions and blast radius apart from RVRMMO | $0 → $0 | Done by Everett 2026-11-16 (account 655385895055) |
+| A2 | IAM user `claude-haki-deployer` + access key in profile `haki-tools` (same pattern as `rvrmmo-s5`) | Lets Claude run Terraform and deploys from this Mac | $0 → $0 | Done by Everett 2026-11-16 |
+| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | To confirm: not found inside the member account |
 
 ## B. Static hosting (slice S2)
 
 | ID | Item | What it is / why | Monthly cost (free tier → worst case) | Status |
 |---|---|---|---|---|
-| B1 | S3 bucket `haki-tools-tfstate-<account-id>` (versioned, encrypted, S3-native locking) | Terraform remembers what it built | <$0.01 → <$0.01 | Pending |
-| B2 | S3 bucket `haki-tools-site-<account-id>` (private, Block Public Access on) | Holds the built site files (about 10 MB) | <$0.01 → $0.01 | Pending |
-| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Pending |
-| B4 | CloudFront Origin Access Control | Only CloudFront can read the bucket | $0 → $0 | Pending |
-| B5 | CloudFront Function `haki-viewer-request` (www→apex redirect, `/path` → `/path/index.html`) | Clean URLs such as `/rvrmmo/privacy` | $0 (2M free) → about $0.02 | Pending |
-| B6 | CloudFront cache policy + response-headers policy (HSTS, CSP, etc.) | Speed and security headers | $0 → $0 | Pending |
-| B7 | ACM public certificate for `haki.tools` + `www.haki.tools` | The HTTPS certificate; renews automatically | $0 → $0 | Pending |
-| B8 | CloudFront invalidations on deploy (`/*`) | Visitors see a new deploy at once | $0 (1,000 paths/month free) → $0 | Pending |
-| B9 | IAM OIDC identity provider for `token.actions.githubusercontent.com` | Lets GitHub Actions sign in to AWS without stored keys | $0 → $0 | Pending |
-| B10 | IAM role `haki-github-deploy` (trusts only `repo:akoben-dev/haki-tools:ref:refs/heads/main`; may only write the site bucket and invalidate the distribution) | The deploy workflow's narrow, short-lived permissions | $0 → $0 | Pending |
+| B1 | S3 bucket `haki-tools-tfstate-<account-id>` (versioned, encrypted, S3-native locking) | Terraform remembers what it built | <$0.01 → <$0.01 | Approved 2026-11-16, created |
+| B2 | S3 bucket `haki-tools-site-<account-id>` (private, Block Public Access on) | Holds the built site files (about 10 MB) | <$0.01 → $0.01 | Approved 2026-11-16, created |
+| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Approved 2026-11-16; blocked until AWS verifies the account for CloudFront |
+| B4 | CloudFront Origin Access Control | Only CloudFront can read the bucket | $0 → $0 | Approved 2026-11-16, created |
+| B5 | CloudFront Function `haki-viewer-request` (www→apex redirect, `/path` → `/path/index.html`) | Clean URLs such as `/rvrmmo/privacy` | $0 (2M free) → about $0.02 | Approved 2026-11-16, created |
+| B6 | CloudFront cache policy + response-headers policy (HSTS, CSP, etc.) | Speed and security headers | $0 → $0 | Approved 2026-11-16, created |
+| B7 | ACM public certificate for `haki.tools` + `www.haki.tools` | The HTTPS certificate; renews automatically | $0 → $0 | Approved 2026-11-16, created |
+| B8 | CloudFront invalidations on deploy (`/*`) | Visitors see a new deploy at once | $0 (1,000 paths/month free) → $0 | Approved 2026-11-16; used on each deploy |
+| B9 | IAM OIDC identity provider for `token.actions.githubusercontent.com` | Lets GitHub Actions sign in to AWS without stored keys | $0 → $0 | Approved 2026-11-16, created |
+| B10 | IAM role `haki-github-deploy` (trusts only `repo:akoben-dev/haki-tools:ref:refs/heads/main`; may only write the site bucket and invalidate the distribution) | The deploy workflow's narrow, short-lived permissions | $0 → $0 | Approved 2026-11-16, created |
 
 **Subtotal B:** $0 inside the free tier, about $1.55/month worst case.
 
