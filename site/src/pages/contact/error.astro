@@ -1,0 +1,11 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config/site';
+---
+<Base title="Message not sent" noindex>
+  <article class="page prose">
+    <h1>Your message didn't go through.</h1>
+    <p class="meta">Please go back and try again, or email <a href={`mailto:${site.fallbackEmail}`}>{site.fallbackEmail}</a>.</p>
+    <p style="margin-top:32px"><a class="btn btn-primary" href="/#contact">Back to the form</a></p>
+  </article>
+</Base>

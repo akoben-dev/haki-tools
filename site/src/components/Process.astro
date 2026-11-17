@@ -1,0 +1,24 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+const copy = (await getEntry('copy', 'process'))!.data;
+const steps = (await getCollection('process')).sort((a, b) => a.data.order - b.data.order);
+---
+<section class="section" id="process" aria-labelledby="process-heading">
+  <div class="wrap">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="process-heading" class="display" data-reveal="display">{copy.heading}</h2>
+    <p class="lede" data-reveal>{copy.body}</p>
+    <div class="steps-wrap">
+    <span class="progress-line" data-progress-line aria-hidden="true"></span>
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="step" data-reveal>
+          <span class="step-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{s.data.title}</h3>
+          <p>{s.data.body}</p>
+        </li>
+      ))}
+    </ol>
+    </div>
+  </div>
+</section>

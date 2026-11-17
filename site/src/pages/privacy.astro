@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+const updated = 'November 15, 2026';
+---
+<Base title="Privacy policy" description="How Haki Tools handles the information you send through haki.tools.">
+  <article class="page prose">
+    <h1>Privacy policy</h1>
+    <p class="meta">Last updated: {updated}</p>
+
+    <p>{site.name} is the trading name of {site.legalName}, a Maryland limited liability company ("{site.name}", "we", "us"). This page explains what information we collect through this website (haki.tools), why, and what we do with it. It covers the {site.name} website only. Policies for our own products, such as the <a href="/rvrmmo/privacy">RVRMMO privacy policy</a>, are on their own pages.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>What you send through the contact form:</strong> your name, email address, business name, and anything you choose to add (location, project type, project description, timeline, budget).</li>
+      <li><strong>Basic technical data needed to deliver the site:</strong> like any website, our hosting provider handles your IP address and browser details in order to send you the pages, and may keep them briefly in security and delivery logs.</li>
+    </ul>
+    <p>We do not use cookies, analytics, advertising trackers, or third-party fonts or scripts that track you.</p>
+
+    <h2>Why we use it</h2>
+    <p>Only to reply to you about your project and to keep a basic record of that conversation. We do not sell your information, add you to mailing lists, or share it with anyone except the services that run this website and deliver our email.</p>
+
+    <h2>Who handles it for us</h2>
+    <ul>
+      <li><strong>Amazon Web Services</strong> hosts the website and passes contact-form messages to our inbox.</li>
+      <li><strong>Our email provider</strong> stores the messages we receive and send.</li>
+    </ul>
+
+    <h2>How long we keep it</h2>
+    <p>We keep your message for as long as we need it to talk with you about your project and to keep normal business records. You can ask us to delete it sooner at any time.</p>
+
+    <h2>Your choices</h2>
+    <p>You can ask to see, correct, or delete the information you sent us. Use the <a href="/#contact">contact form</a> and tell us what you need.</p>
+
+    <h2>Children</h2>
+    <p>This website is for businesses and is not directed at children under 13. We do not knowingly collect their information.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes, we will update this page and the date above.</p>
+  </article>
+</Base>

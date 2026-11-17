@@ -1,0 +1,6 @@
+[
+  { "id": "tell", "order": 1, "title": "Tell me what you're building", "body": "Fill out the intake form and we'll set up a quick call to go over what you want to build. No pressure, just a conversation." },
+  { "id": "shape", "order": 2, "title": "Shape the plan", "body": "We map out scope, milestones, and pricing together. You know exactly what you're getting before any work starts." },
+  { "id": "build", "order": 3, "title": "Build, review, and refine", "body": "You see the work in a functioning demo and give feedback before anything goes live. Your input shapes the final product." },
+  { "id": "launch", "order": 4, "title": "Launch, hand off, and support", "body": "We launch when you're ready. Maintain it yourself, hand it off clean, or have us keep it running, whatever works for you." }
+]

@@ -1,0 +1,22 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+interface Props { stageFrom: number; stageTo: number }
+const { stageFrom, stageTo } = Astro.props;
+const copy = (await getEntry('copy', 'outcomes'))!.data;
+const items = (await getCollection('outcomes')).sort((a, b) => a.data.order - b.data.order);
+---
+<section class="section" id="why-it-matters" aria-labelledby="outcomes-heading" data-stage-from={stageFrom} data-stage-to={stageTo} data-stage-start="top bottom" data-stage-end="top 30%">
+  <div class="wrap">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="outcomes-heading" class="display" data-reveal="display">{copy.heading}</h2>
+    <div class="cards">
+      {items.map((it, i) => (
+        <article class="card" data-reveal>
+          <span class="card-index">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{it.data.title}</h3>
+          <p>{it.data.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

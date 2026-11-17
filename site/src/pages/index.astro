@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Statement from '../components/Statement.astro';
+import Services from '../components/Services.astro';
+import Outcomes from '../components/Outcomes.astro';
+import Process from '../components/Process.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+import { homeKeyframes } from '../config/particles';
+
+const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const { keyframes, servicesBase, afterLanes, contact } = homeKeyframes(lanes.map((l) => l.data.particle));
+---
+<Base keyframes={keyframes} initialStage={1}>
+  <Hero stageFrom={1} stageTo={2} />
+  <Statement />
+  <Services stageBase={servicesBase} />
+  <Outcomes stageFrom={afterLanes} stageTo={afterLanes + 1} />
+  <Process />
+  <Faq />
+  <Contact stageFrom={contact - 1} stageTo={contact} />
+</Base>

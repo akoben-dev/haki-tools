@@ -1,0 +1,75 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../config/site';
+import type { Keyframe } from '../scripts/particles/renderer';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Particle keyframes for this page; omit for pages without the particle stage. */
+  keyframes?: Keyframe[];
+  initialStage?: number;
+  noindex?: boolean;
+}
+const { title, description = site.description, keyframes, initialStage = 1, noindex = false } = Astro.props;
+const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Websites and AI automation for small businesses`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  legalName: site.legalName,
+  url: site.url,
+  description: site.description,
+  areaServed: { '@type': 'Country', name: 'United States' },
+  address: { '@type': 'PostalAddress', addressRegion: 'MD', addressCountry: 'US' },
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#060a08" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site.url}/og-image.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>
+      // Mark JS as available; if the motion script never sets a tier within 3 s, fall back to static.
+      document.documentElement.classList.add('js');
+      setTimeout(function () {
+        var r = document.documentElement;
+        if (!r.dataset.motion) r.dataset.motion = 'static';
+      }, 3000);
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    {keyframes && (
+      <canvas id="particles" aria-hidden="true" data-keyframes={JSON.stringify(keyframes)} data-initial={initialStage}></canvas>
+    )}
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/motion';
+      import '../scripts/nav';
+    </script>
+  </body>
+</html>

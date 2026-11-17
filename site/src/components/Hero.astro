@@ -1,0 +1,24 @@
+---
+import { getEntry } from 'astro:content';
+import { inlineSvg } from '../lib/svg';
+import mark from '../assets/brand/haki-mark.svg?raw';
+interface Props { stageFrom: number; stageTo: number }
+const { stageFrom, stageTo } = Astro.props;
+const hero = (await getEntry('copy', 'hero'))!.data;
+---
+<section class="hero" data-hero aria-labelledby="hero-heading" data-stage-from={stageFrom} data-stage-to={stageTo} data-stage-start="top top" data-stage-end="bottom top">
+  <div class="hero-inner">
+    <div data-hero-copy>
+      <p class="eyebrow" data-hero-item>{hero.eyebrow}</p>
+      <h1 id="hero-heading" data-hero-item>{hero.heading}</h1>
+      <p class="lede" data-hero-item>{hero.body}</p>
+      <div class="hero-actions" data-hero-item>
+        {hero.cta && <a class="btn btn-primary" href={hero.cta.href}>{hero.cta.label} <span class="arrow" aria-hidden="true">→</span></a>}
+        {hero.secondaryCta && <a class="btn btn-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>}
+      </div>
+    </div>
+    <!-- Shown when particles are off (reduced motion, no WebGL, no JS). -->
+    <div class="hero-mark" set:html={inlineSvg(mark, 'Haki Tools logo')} />
+  </div>
+  <span class="scroll-cue" aria-hidden="true">Scroll</span>
+</section>
