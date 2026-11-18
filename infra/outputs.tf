@@ -1,0 +1,30 @@
+output "site_bucket" {
+  value = aws_s3_bucket.site.bucket
+}
+
+output "distribution_id" {
+  value = aws_cloudfront_distribution.site.id
+}
+
+output "cloudfront_domain" {
+  description = "Test URL before DNS moves; also the target for the Namecheap records at cutover (S4)."
+  value       = aws_cloudfront_distribution.site.domain_name
+}
+
+output "deploy_role_arn" {
+  value = aws_iam_role.github_deploy.arn
+}
+
+output "certificate_status" {
+  value = aws_acm_certificate.site.status
+}
+
+output "certificate_validation_records" {
+  description = "Add these CNAMEs at Namecheap (host = name without the trailing .haki.tools.)."
+  value = [for o in aws_acm_certificate.site.domain_validation_options : {
+    domain = o.domain_name
+    name   = o.resource_record_name
+    type   = o.resource_record_type
+    value  = o.resource_record_value
+  }]
+}
