@@ -4,6 +4,8 @@ export function inlineSvg(raw: string, label: string) {
   return raw
     .replace(/<\?xml[^>]*\?>/, '')
     .replace(/\s(id|data-name)="[^"]*"/g, '')
+    // Brand fill follows the active theme's accent token.
+    .replace(/fill="#9ee2bf"/gi, 'style="fill: var(--mint)"')
     .replace('<svg', `<svg role="img" aria-label="${label}"`)
     .trim();
 }

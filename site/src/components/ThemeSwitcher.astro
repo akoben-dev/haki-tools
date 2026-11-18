@@ -1,0 +1,70 @@
+---
+// TEMPORARY theme explorations picker. Remove once a theme is chosen.
+// Shows only in `npm run dev`, or on any build when the URL has ?themes=1.
+// In production without the param this inline script does nothing: no UI, no stored theme applied.
+import themes from '../config/themes.json';
+const list = themes.map((t) => ({ id: t.id, name: t.name, bg: t.bg }));
+const dev = import.meta.env.DEV;
+---
+<script is:inline define:vars={{ list, dev }}>
+  (function () {
+    var on = dev || new URLSearchParams(location.search).get('themes') === '1';
+    if (!on) return;
+    var KEY = 'haki-theme';
+    var root = document.documentElement;
+    var store = {
+      get: function () { try { return localStorage.getItem(KEY); } catch (e) { return null; } },
+      set: function (v) { try { localStorage.setItem(KEY, v); } catch (e) {} },
+    };
+    var select;
+    function apply(id) {
+      var t = list.find(function (x) { return x.id === id; }) || list[0];
+      root.dataset.theme = t.id;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', t.bg);
+      store.set(t.id);
+      if (select) select.value = t.id;
+    }
+    function step(d) {
+      var i = list.findIndex(function (x) { return x.id === root.dataset.theme; });
+      apply(list[(i + d + list.length) % list.length].id);
+    }
+    apply(store.get());
+
+    function build() {
+      var box = document.createElement('div');
+      box.setAttribute('role', 'group');
+      box.setAttribute('aria-label', 'Theme explorations');
+      box.style.cssText = 'position:fixed;right:12px;bottom:12px;z-index:9999;display:flex;gap:6px;align-items:center;padding:6px 8px;border-radius:999px;font:600 12px/1 ui-sans-serif,system-ui,sans-serif;background:var(--bg);color:var(--text);border:1px solid var(--mint);box-shadow:0 6px 24px rgb(0 0 0 / .25)';
+      function btn(label, d, aria) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.textContent = label; b.setAttribute('aria-label', aria);
+        b.style.cssText = 'all:unset;cursor:pointer;padding:4px 8px;border-radius:999px;color:var(--mint)';
+        b.onclick = function () { step(d); };
+        return b;
+      }
+      select = document.createElement('select');
+      select.setAttribute('aria-label', 'Theme');
+      select.style.cssText = 'font:inherit;color:var(--text);background:var(--bg);border:0;padding:4px';
+      list.forEach(function (t, i) {
+        var o = document.createElement('option');
+        o.value = t.id; o.textContent = i + 1 + '. ' + t.name;
+        select.appendChild(o);
+      });
+      select.value = root.dataset.theme;
+      select.onchange = function () { apply(select.value); };
+      box.title = 'Keys: [ and ] cycle themes';
+      box.append(btn('‹', -1, 'Previous theme'), select, btn('›', 1, 'Next theme'));
+      document.body.appendChild(box);
+    }
+    if (document.body) build(); else document.addEventListener('DOMContentLoaded', build);
+
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var tag = (e.target && e.target.tagName) || '';
+      if (/INPUT|TEXTAREA|SELECT/.test(tag) || (e.target && e.target.isContentEditable)) return;
+      if (e.key === ']') step(1);
+      else if (e.key === '[') step(-1);
+    });
+  })();
+</script>

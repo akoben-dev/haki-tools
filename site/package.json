@@ -11,6 +11,7 @@
     "check:scroll": "node scripts/check-no-scroll-listeners.mjs",
     "sync:rvrmmo": "node scripts/sync-rvrmmo-privacy.mjs",
     "test": "npm run check:scroll && npm run build && playwright test",
+    "themes": "node scripts/themes.mjs --check",
     "og": "node scripts/make-og-image.mjs"
   },
   "dependencies": {

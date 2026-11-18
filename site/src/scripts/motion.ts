@@ -56,8 +56,15 @@ async function particles(canvas: HTMLCanvasElement, keyframes: Keyframe[]) {
   const { ParticleRenderer } = await import('./particles/renderer');
   let renderer: InstanceType<typeof ParticleRenderer>;
   try {
-    const color = getComputedStyle(root).getPropertyValue('--mint').trim() || '#9ee2bf';
-    renderer = new ParticleRenderer(canvas, keyframes, caps.particles, caps.dpr, logoSvg, color, 0);
+    renderer = new ParticleRenderer(canvas, keyframes, caps.particles, caps.dpr, logoSvg, '#9ee2bf', 0);
+    // Read particle colours from the active theme's CSS tokens, and again whenever data-theme changes.
+    const applyTheme = () => {
+      const css = getComputedStyle(root);
+      const tok = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
+      renderer.setTheme(tok('--particle', '#9ee2bf'), tok('--particle-hi', '#ffffff'), tok('--particle-blend', 'additive'));
+    };
+    applyTheme();
+    new MutationObserver(applyTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   } catch {
     root.dataset.motion = 'static';
     return;
