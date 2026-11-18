@@ -10,6 +10,7 @@ Every resource here maps to an approved line in `docs/rebuild/HOSTING-AND-COSTS.
 | `cdn.tf` | B3–B7 | Certificate, OAC, viewer-request function, security headers, distribution |
 | `functions/viewer-request.js` | B5 | www → apex, `/path` → `/path/`, `/path/` → `/path/index.html` |
 | `github.tf` | B9, B10 | GitHub OIDC provider and the `haki-github-deploy` role |
+| `contact.tf`, `lambda/contact/` | C1–C6 | SES identities, HTTP API (`POST /api/contact`, `GET /api/contact/token`), Lambda, logs, HMAC key in SSM, 5xx alarm + SNS |
 
 ## One-time bootstrap (done 2026-11-16; CloudFront live 2026-11-18, repo variables set)
 
@@ -60,6 +61,10 @@ SITE_BUCKET=… DISTRIBUTION_ID=… AWS_PROFILE=haki-tools ./scripts/deploy.sh
 
 ## Known limits
 
-- `POST /api/contact` isn't routed yet (S3 adds API Gateway + Lambda). Until then the
-  form shows its error state with the fallback email.
+- SES stays in the sandbox on purpose: it only sends to verified addresses, and the
+  only recipient is Everett's inbox (verified once by clicking AWS's email link).
+- The anti-bot token is a filter, not a gate: forms without one (no JavaScript) are
+  still accepted; honeypot, link-count and API throttling (1 rps, burst 5) still apply.
+- Contact form one-time setup: add `terraform output ses_dkim_records` at Namecheap,
+  click the SES verification email, and confirm the SNS subscription email.
 - CSP allows `'unsafe-inline'` scripts and styles because Astro inlines a few small ones.

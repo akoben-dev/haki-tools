@@ -18,3 +18,9 @@ variable "custom_domain_enabled" {
   type        = bool
   default     = true
 }
+
+variable "contact_to" {
+  description = "Inbox that receives contact form messages (and form alarms)."
+  type        = string
+  default     = "robbie.robinson@akoben.ai"
+}

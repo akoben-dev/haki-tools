@@ -1,12 +1,29 @@
 // Contact form, progressive enhancement.
-// Without JS: a normal POST to PUBLIC_FORM_ENDPOINT; the backend answers with a
-// 303 redirect to /contact/thanks or /contact/error (slice S3).
+// Without JS: a normal POST to PUBLIC_FORM_ENDPOINT; the backend (infra/lambda/contact) answers with a
+// 303 redirect to /contact/thanks/ or /contact/error/.
 // With JS: validate inline, POST JSON, and show the success state in place.
 const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
 
 if (form) {
   const started = form.querySelector<HTMLInputElement>('input[name="started_at"]');
   if (started) started.value = String(Date.now());
+
+  // Anti-bot: a signed timestamp from the backend, fetched once the visitor starts
+  // typing. The backend drops messages sent within seconds of it. If the fetch
+  // fails the form still sends; the token is a filter, not a gate.
+  const tokenInput = form.querySelector<HTMLInputElement>('input[name="token"]');
+  const tokenUrl = form.action.replace(/\/?$/, '/token');
+  let tokenRequested = false;
+  form.addEventListener('focusin', () => {
+    if (tokenRequested || !tokenInput) return;
+    tokenRequested = true;
+    fetch(tokenUrl, { headers: { Accept: 'application/json' } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (j?.token) tokenInput.value = j.token;
+      })
+      .catch(() => {});
+  });
   const status = form.querySelector<HTMLElement>('[data-form-status]')!;
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const success = document.querySelector<HTMLElement>('[data-form-success]');

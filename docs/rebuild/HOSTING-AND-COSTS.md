@@ -35,12 +35,12 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 
 | ID | Item | What it is / why | Monthly cost (free tier → worst case) | Status |
 |---|---|---|---|---|
-| C1 | SES domain identity `haki.tools` (Easy DKIM, 3 CNAMEs at Namecheap) + verified recipient `robbie.robinson@akoben.ai` | Sends form messages as `website@haki.tools`, signed so they don't land in spam | $0 → about $0.01 (100 emails × $0.10/1000) | Pending |
-| C2 | API Gateway HTTP API `haki-contact` (route `POST /api/contact`, throttled 1 rps / burst 5) | Public entry point for the form, with rate limiting | $0 → <$0.01 ($1 per million) | Pending |
-| C3 | Lambda `haki-contact` (Node.js 22, arm64, 128 MB) + its IAM role (SES send only) | Validates, filters spam, sends the email | $0 (1M requests free) → <$0.01 | Pending |
-| C4 | CloudWatch Logs group for the Lambda, 30-day retention | Troubleshooting; metadata only, no message bodies | $0 (5 GB free) → <$0.01 | Pending |
-| C5 | SSM Parameter Store `SecureString` `/haki/contact/hmac-key` (standard tier, AWS-managed key) | Secret that signs the anti-bot timestamp | $0 → $0 | Pending |
-| C6 | CloudWatch alarm on Lambda errors + SNS topic emailing Everett | Tells you if the form breaks | $0 (10 alarms free) → $0.10 | Pending |
+| C1 | SES domain identity `haki.tools` (Easy DKIM, 3 CNAMEs at Namecheap) + verified recipient `robbie.robinson@akoben.ai` | Sends form messages as `website@haki.tools`, signed so they don't land in spam | $0 → about $0.01 (100 emails × $0.10/1000) | Approved 2026-11-18, created |
+| C2 | API Gateway HTTP API `haki-contact` (route `POST /api/contact`, throttled 1 rps / burst 5) | Public entry point for the form, with rate limiting | $0 → <$0.01 ($1 per million) | Approved 2026-11-18, created |
+| C3 | Lambda `haki-contact` (Node.js 22, arm64, 128 MB) + its IAM role (SES send only) | Validates, filters spam, sends the email | $0 (1M requests free) → <$0.01 | Approved 2026-11-18, created |
+| C4 | CloudWatch Logs group for the Lambda, 30-day retention | Troubleshooting; metadata only, no message bodies | $0 (5 GB free) → <$0.01 | Approved 2026-11-18, created |
+| C5 | SSM Parameter Store `SecureString` `/haki/contact/hmac-key` (standard tier, AWS-managed key) | Secret that signs the anti-bot timestamp | $0 → $0 | Approved 2026-11-18, created |
+| C6 | CloudWatch alarm on the contact API's 5xx responses (Lambda crash or SES failure) + SNS topic emailing Everett | Tells you if the form breaks | $0 (10 alarms free) → $0.10 | Approved 2026-11-18, created |
 
 **Subtotal C:** $0 inside the free tier, about $0.12/month worst case.
 

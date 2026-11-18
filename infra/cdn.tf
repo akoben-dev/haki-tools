@@ -2,6 +2,9 @@ locals {
   aliases = [var.domain, "www.${var.domain}"]
   # AWS-managed "CachingOptimized" cache policy (gzip + brotli, honours origin Cache-Control).
   caching_optimized = "658327ea-f89d-4fab-a63d-7e88639e58f6"
+  # AWS-managed "CachingDisabled" and "AllViewerExceptHostHeader" (for the API origin).
+  caching_disabled       = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad"
+  all_viewer_except_host = "b689b0a8-53d0-40ab-baf2-68738e2966ac"
 }
 
 # B7: public certificate for the apex and www, validated by a DNS record at Namecheap.
@@ -93,6 +96,30 @@ resource "aws_cloudfront_distribution" "site" {
     origin_id                = "site-bucket"
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.site.id
+  }
+
+  # C2: same-origin /api/* goes to the contact API (no CORS needed).
+  origin {
+    origin_id   = "contact-api"
+    domain_name = replace(aws_apigatewayv2_api.contact.api_endpoint, "https://", "")
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  ordered_cache_behavior {
+    path_pattern               = "/api/*"
+    target_origin_id           = "contact-api"
+    viewer_protocol_policy     = "redirect-to-https"
+    allowed_methods            = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    cached_methods             = ["GET", "HEAD"]
+    compress                   = true
+    cache_policy_id            = local.caching_disabled
+    origin_request_policy_id   = local.all_viewer_except_host
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security.id
   }
 
   default_cache_behavior {
