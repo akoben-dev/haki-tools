@@ -61,7 +61,7 @@ async function particles(canvas: HTMLCanvasElement, keyframes: Keyframe[]) {
     const applyTheme = () => {
       const css = getComputedStyle(root);
       const tok = (name: string, fallback: string) => css.getPropertyValue(name).trim() || fallback;
-      renderer.setTheme(tok('--particle', '#9ee2bf'), tok('--particle-hi', '#ffffff'), tok('--particle-blend', 'additive'));
+      renderer.setTheme(tok('--particle', '#9ee2bf'), tok('--particle-hi', '#ffffff'), tok('--particle-blend', 'additive'), Number(tok('--particle-hi-share', '0.25')), Number(tok('--particle-hi-mix', '0.55')));
     };
     applyTheme();
     new MutationObserver(applyTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });

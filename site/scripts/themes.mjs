@@ -40,7 +40,7 @@ const css = [
   --accent-2: ${t.accent2}; --accent-2-rgb: ${rgb(t.accent2)};
   --bg: ${t.bg}; --bg-rgb: ${rgb(t.bg)}; --surface-rgb: ${rgb(t.surface)};
   --text: ${t.text}; --text-soft: ${t.textSoft}; --muted: ${t.muted}; --danger: ${t.danger}; --on-mint: ${t.onMint};
-  --particle: ${t.particle}; --particle-hi: ${t.particleHi}; --particle-blend: ${t.blend};
+  --particle: ${t.particle}; --particle-hi: ${t.particleHi}; --particle-blend: ${t.blend}; --particle-hi-share: ${t.hiShare ?? 0.25}; --particle-hi-mix: ${t.hiMix ?? 0.55};
   color-scheme: ${t.scheme};
 }`),
 ].join('\n');

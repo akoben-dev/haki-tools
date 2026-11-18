@@ -169,5 +169,24 @@
     "particle": "#0b6e83",
     "particleHi": "#0d2530",
     "blend": "normal"
+  },
+  {
+    "id": "tide-gold",
+    "name": "Tidewater & Gold",
+    "scheme": "light",
+    "bg": "#eef5f7",
+    "surface": "#fafdfe",
+    "text": "#0d2530",
+    "muted": "#476270",
+    "mint": "#0b6e83",
+    "mintStrong": "#095a6b",
+    "accent2": "#9a6f0e",
+    "onMint": "#ffffff",
+    "danger": "#a8321f",
+    "particle": "#0b6e83",
+    "particleHi": "#c8920f",
+    "blend": "normal",
+    "hiShare": 0.45,
+    "hiMix": 1
   }
 ]
