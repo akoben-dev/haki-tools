@@ -12,7 +12,7 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 |---|---|---|---|---|
 | A1 | AWS Organizations member account `haki-tools` | Keeps the consulting business's bills, permissions and blast radius apart from RVRMMO | $0 → $0 | Done by Everett 2026-11-16 (account 655385895055) |
 | A2 | IAM user `claude-haki-deployer` + access key in profile `haki-tools` (same pattern as `rvrmmo-s5`) | Lets Claude run Terraform and deploys from this Mac | $0 → $0 | Done by Everett 2026-11-16 |
-| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | To confirm: not found inside the member account |
+| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | Done by Everett 2026-11-17 |
 
 ## B. Static hosting (slice S2)
 
@@ -20,7 +20,7 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 |---|---|---|---|---|
 | B1 | S3 bucket `haki-tools-tfstate-<account-id>` (versioned, encrypted, S3-native locking) | Terraform remembers what it built | <$0.01 → <$0.01 | Approved 2026-11-16, created |
 | B2 | S3 bucket `haki-tools-site-<account-id>` (private, Block Public Access on) | Holds the built site files (about 10 MB) | <$0.01 → $0.01 | Approved 2026-11-16, created |
-| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Approved 2026-11-16; blocked until AWS verifies the account for CloudFront |
+| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Approved 2026-11-16, created 2026-11-18 (E1COPI53XVZT12) |
 | B4 | CloudFront Origin Access Control | Only CloudFront can read the bucket | $0 → $0 | Approved 2026-11-16, created |
 | B5 | CloudFront Function `haki-viewer-request` (www→apex redirect, `/path` → `/path/index.html`) | Clean URLs such as `/rvrmmo/privacy` | $0 (2M free) → about $0.02 | Approved 2026-11-16, created |
 | B6 | CloudFront cache policy + response-headers policy (HSTS, CSP, etc.) | Speed and security headers | $0 → $0 | Approved 2026-11-16, created |

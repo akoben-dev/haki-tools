@@ -11,7 +11,7 @@ Every resource here maps to an approved line in `docs/rebuild/HOSTING-AND-COSTS.
 | `functions/viewer-request.js` | B5 | www → apex, `/path` → `/path/`, `/path/` → `/path/index.html` |
 | `github.tf` | B9, B10 | GitHub OIDC provider and the `haki-github-deploy` role |
 
-## One-time bootstrap (already done 2026-11-16)
+## One-time bootstrap (done 2026-11-16; CloudFront live 2026-11-18, repo variables set)
 
 The state bucket can't be created by the Terraform that stores state in it, so it was
 made with the CLI: `haki-tools-tfstate-655385895055`, versioned, SSE-S3, Block Public
