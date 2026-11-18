@@ -12,7 +12,7 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 |---|---|---|---|---|
 | A1 | AWS Organizations member account `haki-tools` | Keeps the consulting business's bills, permissions and blast radius apart from RVRMMO | $0 → $0 | Done by Everett 2026-11-16 (account 655385895055) |
 | A2 | IAM user `claude-haki-deployer` + access key in profile `haki-tools` (same pattern as `rvrmmo-s5`) | Lets Claude run Terraform and deploys from this Mac | $0 → $0 | Done by Everett 2026-11-16 |
-| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | To confirm: not found inside the member account |
+| A3 | AWS Budget "haki-tools-monthly" at $5 with email alerts at 50% / 100% / forecast 100% | Early warning on surprise spend | $0 (the first two budgets are free) → $0 | Done by Everett 2026-11-17 |
 
 ## B. Static hosting (slice S2)
 
@@ -20,7 +20,7 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 |---|---|---|---|---|
 | B1 | S3 bucket `haki-tools-tfstate-<account-id>` (versioned, encrypted, S3-native locking) | Terraform remembers what it built | <$0.01 → <$0.01 | Approved 2026-11-16, created |
 | B2 | S3 bucket `haki-tools-site-<account-id>` (private, Block Public Access on) | Holds the built site files (about 10 MB) | <$0.01 → $0.01 | Approved 2026-11-16, created |
-| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Approved 2026-11-16; blocked until AWS verifies the account for CloudFront |
+| B3 | CloudFront distribution (`haki.tools`, `www.haki.tools`, PriceClass_100, HTTP/3) | Global HTTPS delivery of the site | $0 (1 TB + 10M requests free) → about $1.50 (15 GB × $0.085 + 200k requests × $0.01/10k) | Approved 2026-11-16, created 2026-11-18 (E1COPI53XVZT12) |
 | B4 | CloudFront Origin Access Control | Only CloudFront can read the bucket | $0 → $0 | Approved 2026-11-16, created |
 | B5 | CloudFront Function `haki-viewer-request` (www→apex redirect, `/path` → `/path/index.html`) | Clean URLs such as `/rvrmmo/privacy` | $0 (2M free) → about $0.02 | Approved 2026-11-16, created |
 | B6 | CloudFront cache policy + response-headers policy (HSTS, CSP, etc.) | Speed and security headers | $0 → $0 | Approved 2026-11-16, created |
@@ -35,12 +35,12 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 
 | ID | Item | What it is / why | Monthly cost (free tier → worst case) | Status |
 |---|---|---|---|---|
-| C1 | SES domain identity `haki.tools` (Easy DKIM, 3 CNAMEs at Namecheap) + verified recipient `robbie.robinson@akoben.ai` | Sends form messages as `website@haki.tools`, signed so they don't land in spam | $0 → about $0.01 (100 emails × $0.10/1000) | Pending |
-| C2 | API Gateway HTTP API `haki-contact` (route `POST /api/contact`, throttled 1 rps / burst 5) | Public entry point for the form, with rate limiting | $0 → <$0.01 ($1 per million) | Pending |
-| C3 | Lambda `haki-contact` (Node.js 22, arm64, 128 MB) + its IAM role (SES send only) | Validates, filters spam, sends the email | $0 (1M requests free) → <$0.01 | Pending |
-| C4 | CloudWatch Logs group for the Lambda, 30-day retention | Troubleshooting; metadata only, no message bodies | $0 (5 GB free) → <$0.01 | Pending |
-| C5 | SSM Parameter Store `SecureString` `/haki/contact/hmac-key` (standard tier, AWS-managed key) | Secret that signs the anti-bot timestamp | $0 → $0 | Pending |
-| C6 | CloudWatch alarm on Lambda errors + SNS topic emailing Everett | Tells you if the form breaks | $0 (10 alarms free) → $0.10 | Pending |
+| C1 | SES domain identity `haki.tools` (Easy DKIM, 3 CNAMEs at Namecheap) + verified recipient `robbie.robinson@akoben.ai` | Sends form messages as `website@haki.tools`, signed so they don't land in spam | $0 → about $0.01 (100 emails × $0.10/1000) | Approved 2026-11-18, created |
+| C2 | API Gateway HTTP API `haki-contact` (route `POST /api/contact`, throttled 1 rps / burst 5) | Public entry point for the form, with rate limiting | $0 → <$0.01 ($1 per million) | Approved 2026-11-18, created |
+| C3 | Lambda `haki-contact` (Node.js 22, arm64, 128 MB) + its IAM role (SES send only) | Validates, filters spam, sends the email | $0 (1M requests free) → <$0.01 | Approved 2026-11-18, created |
+| C4 | CloudWatch Logs group for the Lambda, 30-day retention | Troubleshooting; metadata only, no message bodies | $0 (5 GB free) → <$0.01 | Approved 2026-11-18, created |
+| C5 | SSM Parameter Store `SecureString` `/haki/contact/hmac-key` (standard tier, AWS-managed key) | Secret that signs the anti-bot timestamp | $0 → $0 | Approved 2026-11-18, created |
+| C6 | CloudWatch alarm on the contact API's 5xx responses (Lambda crash or SES failure) + SNS topic emailing Everett | Tells you if the form breaks | $0 (10 alarms free) → $0.10 | Approved 2026-11-18, created |
 
 **Subtotal C:** $0 inside the free tier, about $0.12/month worst case.
 

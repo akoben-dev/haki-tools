@@ -12,10 +12,15 @@ variable "github_repo" {
 
 variable "custom_domain_enabled" {
   description = <<-EOT
-    Attach haki.tools / www.haki.tools to CloudFront. Leave false until the ACM
-    certificate shows ISSUED (its DNS validation record has been added at
-    Namecheap). Before that, the site is reachable on its *.cloudfront.net name.
+    Attach haki.tools / www.haki.tools to CloudFront. Needs the ACM
+    certificate ISSUED (validation CNAMEs at Namecheap; issued 2026-11-17).
   EOT
   type        = bool
-  default     = false
+  default     = true
+}
+
+variable "contact_to" {
+  description = "Inbox that receives contact form messages (and form alarms)."
+  type        = string
+  default     = "robbie.robinson@akoben.ai"
 }

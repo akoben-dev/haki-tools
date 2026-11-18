@@ -28,3 +28,12 @@ output "certificate_validation_records" {
     value  = o.resource_record_value
   }]
 }
+
+output "ses_dkim_records" {
+  description = "Add these 3 CNAMEs at Namecheap (C1)."
+  value = [for t in aws_sesv2_email_identity.domain.dkim_signing_attributes[0].tokens : {
+    host  = "${t}._domainkey"
+    type  = "CNAME"
+    value = "${t}.dkim.amazonses.com"
+  }]
+}
