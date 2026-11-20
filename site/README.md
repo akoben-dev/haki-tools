@@ -2,7 +2,7 @@
 
 The new Haki Tools site: Astro (static pages), Three.js particles that morph as you scroll, and GSAP ScrollTrigger + Lenis for the scroll feel. The plan and decisions behind it are in [`../docs/rebuild/`](../docs/rebuild/PLAN.md).
 
-> The old site files in the repo root (`index.html`, `css/`, `js/`, `config/`, `assets/`) are still what the Contabo VPS serves. They stay untouched until the DNS cutover (slice S4).
+> Live at https://haki.tools since the DNS cutover on 2026-11-19 ([record](../docs/rebuild/CUTOVER.md)). Merges to `main` that touch `site/` deploy automatically.
 
 ## Local development
 
