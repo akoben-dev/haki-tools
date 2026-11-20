@@ -36,6 +36,7 @@ Region: `us-east-1`. Prices are AWS list prices in USD, before tax, as of Novemb
 | ID | Item | What it is / why | Monthly cost (free tier → worst case) | Status |
 |---|---|---|---|---|
 | C1 | SES domain identity `haki.tools` (Easy DKIM, 3 CNAMEs at Namecheap) + verified recipient `robbie.robinson@akoben.ai` | Sends form messages as `website@haki.tools`, signed so they don't land in spam | $0 → about $0.01 (100 emails × $0.10/1000) | Approved 2026-11-18, created |
+| C1b | SES custom MAIL FROM `mail.haki.tools` on the C1 identity (setting, not a new billed resource) + Namecheap MX/TXT for `mail` | Aligns SPF with haki.tools for DMARC so form mail is less likely to land in spam | $0 → $0 | Approved 2026-11-19, created |
 | C2 | API Gateway HTTP API `haki-contact` (route `POST /api/contact`, throttled 1 rps / burst 5) | Public entry point for the form, with rate limiting | $0 → <$0.01 ($1 per million) | Approved 2026-11-18, created |
 | C3 | Lambda `haki-contact` (Node.js 22, arm64, 128 MB) + its IAM role (SES send only) | Validates, filters spam, sends the email | $0 (1M requests free) → <$0.01 | Approved 2026-11-18, created |
 | C4 | CloudWatch Logs group for the Lambda, 30-day retention | Troubleshooting; metadata only, no message bodies | $0 (5 GB free) → <$0.01 | Approved 2026-11-18, created |

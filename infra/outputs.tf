@@ -37,3 +37,11 @@ output "ses_dkim_records" {
     value = "${t}.dkim.amazonses.com"
   }]
 }
+
+output "ses_mail_from_records" {
+  description = "Add these at Namecheap (host relative to haki.tools) for the custom MAIL FROM domain."
+  value = [
+    { host = "mail", type = "MX", value = "feedback-smtp.us-east-1.amazonses.com", priority = 10 },
+    { host = "mail", type = "TXT", value = "v=spf1 include:amazonses.com ~all" },
+  ]
+}
