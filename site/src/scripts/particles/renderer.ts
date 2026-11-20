@@ -5,6 +5,7 @@
 // the scroll orchestrator (stage 2.4 = 40% of the way from keyframe 2 to 3).
 import {
   AdditiveBlending,
+  NormalBlending,
   BufferAttribute,
   BufferGeometry,
   Color,
@@ -75,14 +76,24 @@ const vertexShader = /* glsl */ `
 
 const fragmentShader = /* glsl */ `
   uniform vec3 uColor;
+  uniform vec3 uHi;
+  uniform float uHiFrom;
+  uniform float uHiMix;
+  uniform float uPremul;
   uniform float uOpacity;
   varying float vAlpha;
   varying float vTint;
   void main() {
     float d = length(gl_PointCoord - 0.5);
     float a = smoothstep(0.5, 0.05, d);
-    vec3 col = mix(uColor, vec3(1.0), smoothstep(0.75, 1.0, vTint) * 0.55);
-    gl_FragColor = vec4(col, a * vAlpha * uOpacity);
+    vec3 col = mix(uColor, uHi, smoothstep(uHiFrom, 1.0, vTint) * uHiMix);
+    float alpha = a * vAlpha * uOpacity;
+    // Light themes: output premultiplied colour so soft edges don't wash out to white over the page.
+    // Dots also need more opacity to read as colour (not grey) on a light page.
+    if (uPremul > 0.5) {
+      col = pow(col, vec3(1.0 / 2.2)); // uniforms arrive in linear space; show the true token colour
+      alpha = min(1.0, alpha * 1.9); gl_FragColor = vec4(col * alpha, alpha); }
+    else gl_FragColor = vec4(col, alpha);
   }
 `;
 
@@ -144,6 +155,10 @@ export class ParticleRenderer {
         uSize: { value: count > 12000 ? 2.4 : 3.0 },
         uPixelRatio: { value: dpr },
         uColor: { value: new Color(color) },
+        uHi: { value: new Color('#ffffff') },
+        uHiFrom: { value: 0.75 },
+        uHiMix: { value: 0.55 },
+        uPremul: { value: 0 },
         uOpacity: { value: 1 },
         uPointer: { value: this.pointer },
         uPointerForce: { value: 0 },
@@ -155,6 +170,20 @@ export class ParticleRenderer {
 
     this.displayStage = initialStage;
     this.resize();
+  }
+
+  /** Apply theme colours. Additive blending glows on dark pages; light pages need normal blending. */
+  setTheme(color: string, hi: string, blend: string, hiShare = 0.25, hiMix = 0.55) {
+    // hiShare: rough fraction of particles tinted toward `hi`; hiMix: how strongly.
+    this.material.uniforms.uHiFrom.value = 1 - hiShare;
+    this.material.uniforms.uHiMix.value = hiMix;
+    this.material.uniforms.uColor.value.set(color);
+    this.material.uniforms.uHi.value.set(hi);
+    const normal = blend === 'normal';
+    this.material.blending = normal ? NormalBlending : AdditiveBlending;
+    this.material.premultipliedAlpha = normal;
+    this.material.uniforms.uPremul.value = normal ? 1 : 0;
+    this.material.needsUpdate = true;
   }
 
   /** Recompute pixel-space positions for every keyframe (on load and resize). */

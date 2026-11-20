@@ -1,6 +1,8 @@
 ---
 import '@fontsource-variable/space-grotesk';
 import '../styles/global.css';
+import ThemeSwitcher from '../components/ThemeSwitcher.astro';
+import { defaultTheme } from '../config/theme';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../config/site';
@@ -29,7 +31,7 @@ const jsonLd = {
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme={defaultTheme.id}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,7 +39,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#060a08" />
+    <meta name="theme-color" content={defaultTheme.bg} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta property="og:type" content="website" />
@@ -47,6 +49,7 @@ const jsonLd = {
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={`${site.url}/og-image.png`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <ThemeSwitcher />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <script is:inline>
       // Mark JS as available; if the motion script never sets a tier within 3 s, fall back to static.
