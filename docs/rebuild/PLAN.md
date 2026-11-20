@@ -168,6 +168,6 @@ Every resource and its monthly cost is listed in [HOSTING-AND-COSTS.md](HOSTING-
 | S1b | Logo exploration: 3 redrawn marks in the same green, as SVG, shown as particles and flat. The approved one replaces the morph target and favicon. | The chosen mark — **Done 2026-11-15: Everett picked D · HT Gem** (H and T overlapping in the gem, redrawn bold). All options in `site/src/assets/brand/explorations/`. |
 | S2 | AWS account + Terraform: state, S3, CloudFront, ACM, function, headers, budget. Site served on the `cloudfront.net` name. | Cost lines A1–A3, B1–B10 |
 | S3 | Contact backend: HTTP API + Lambda + SES + alarm. Real test submissions. | Cost lines C1–C6 |
-| S4 | DNS cutover at Namecheap (apex ALIAS); VPS stays as fallback | The cutover moment |
+| S4 | DNS cutover at Namecheap (apex ALIAS); VPS stays as fallback | The cutover moment — **Done 2026-11-19**, see [CUTOVER.md](CUTOVER.md) (results and rollback) |
 | S5 | Content pass aligned with HCPM | The copy |
 | S6 | Remove old root files; VPS retirement | Each separately |
