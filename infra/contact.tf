@@ -7,6 +7,16 @@ resource "aws_sesv2_email_identity" "domain" {
   email_identity = var.domain
 }
 
+# C1b ($0): custom MAIL FROM so the envelope sender is mail.haki.tools, not
+# amazonses.com. That aligns SPF with haki.tools for DMARC, which helps inbox
+# placement. Needs an MX + SPF TXT for `mail` at Namecheap (see outputs). Until
+# those exist SES falls back to its own MAIL FROM, so mail keeps flowing.
+resource "aws_sesv2_email_identity_mail_from_attributes" "domain" {
+  email_identity         = aws_sesv2_email_identity.domain.email_identity
+  mail_from_domain       = "mail.${var.domain}"
+  behavior_on_mx_failure = "USE_DEFAULT_VALUE"
+}
+
 # ... and the recipient. While SES is in the sandbox it may only send to verified
 # addresses; AWS emails a confirmation link to this inbox once.
 resource "aws_sesv2_email_identity" "recipient" {

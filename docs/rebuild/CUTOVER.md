@@ -37,3 +37,16 @@ The VPS stays running for about a week after cutover (until about 2026-11-26), s
 4. Optional: set `www` CNAME back to `haki.tools.`. Not required: CloudFront serves www either way.
 
 Visitors return to the old site within the TTL (minutes, up to ~30 for caches that saw the old 30-minute TTL). The contact form on the old site is the old one. After the VPS is shut down (S6), rollback is no longer possible, so only shut it down once Everett confirms the launch is good.
+
+## Deliverability follow-up (2026-11-19, approved by Everett, $0)
+Because a no-JS test message landed in Spam:
+- **SES custom MAIL FROM** `mail.haki.tools` (Terraform `aws_sesv2_email_identity_mail_from_attributes.domain`, cost line C1b). `behavior_on_mx_failure = USE_DEFAULT_VALUE`, so if the `mail` records ever break, SES falls back to `amazonses.com` and mail still flows.
+- **New Namecheap records** (additions only; nothing existing changed):
+
+| Host | Type | Value |
+|---|---|---|
+| `mail` | MX (priority 10) | `feedback-smtp.us-east-1.amazonses.com` |
+| `mail` | TXT | `v=spf1 include:amazonses.com ~all` |
+| `_dmarc` | TXT | `v=DMARC1; p=none;` |
+
+`p=none` is observe-only: it never rejects or quarantines mail, including Google Workspace mail. Tighten to `p=quarantine` only after a few weeks of clean sending, and add a report address (`rua=`) if you want the daily reports.
