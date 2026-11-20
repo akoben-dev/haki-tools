@@ -1,12 +1,14 @@
 ---
-// TEMPORARY theme explorations picker. Remove once a theme is chosen.
+// Hidden theme picker for trying the other themes on the live site.
 // Shows only in `npm run dev`, or on any build when the URL has ?themes=1.
-// In production without the param this inline script does nothing: no UI, no stored theme applied.
+// Without the param this inline script does nothing: visitors always get the default theme (config/theme.ts).
 import themes from '../config/themes.json';
+import { defaultTheme } from '../config/theme';
+const defaultId = defaultTheme.id;
 const list = themes.map((t) => ({ id: t.id, name: t.name, bg: t.bg }));
 const dev = import.meta.env.DEV;
 ---
-<script is:inline define:vars={{ list, dev }}>
+<script is:inline define:vars={{ list, dev, defaultId }}>
   (function () {
     var on = dev || new URLSearchParams(location.search).get('themes') === '1';
     if (!on) return;
@@ -18,7 +20,7 @@ const dev = import.meta.env.DEV;
     };
     var select;
     function apply(id) {
-      var t = list.find(function (x) { return x.id === id; }) || list[0];
+      var t = list.find(function (x) { return x.id === id; }) || list.find(function (x) { return x.id === defaultId; }) || list[0];
       root.dataset.theme = t.id;
       var meta = document.querySelector('meta[name="theme-color"]');
       if (meta) meta.setAttribute('content', t.bg);
@@ -48,7 +50,7 @@ const dev = import.meta.env.DEV;
       select.style.cssText = 'font:inherit;color:var(--text);background:var(--bg);border:0;padding:4px';
       list.forEach(function (t, i) {
         var o = document.createElement('option');
-        o.value = t.id; o.textContent = i + 1 + '. ' + t.name;
+        o.value = t.id; o.textContent = i + 1 + '. ' + t.name + (t.id === defaultId ? ' (live)' : '');
         select.appendChild(o);
       });
       select.value = root.dataset.theme;

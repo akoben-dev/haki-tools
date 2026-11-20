@@ -41,3 +41,18 @@ test('no horizontal page overflow', async ({ page }) => {
     expect(overflow, path).toBeLessThanOrEqual(0);
   }
 });
+
+test('visitors get the Tidewater & Gold theme and no theme picker', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'tide-gold');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#eef5f7');
+  await expect(page.getByRole('group', { name: 'Theme explorations' })).toHaveCount(0);
+});
+
+test('?themes=1 shows the picker for trying other themes', async ({ page }) => {
+  await page.goto('/?themes=1');
+  const picker = page.getByRole('combobox', { name: 'Theme' });
+  await expect(picker).toHaveValue('tide-gold');
+  await picker.selectOption('forest');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'forest');
+});
