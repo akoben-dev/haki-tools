@@ -167,7 +167,10 @@ function wordReveals() {
         opacity: 1,
         ease: 'none',
         stagger: 0.5,
-        scrollTrigger: { trigger: section, start: 'top 60%', end: 'bottom bottom', scrub: 0.5 },
+        // Finish while the text is still pinned: 'bottom 150%' leaves the last
+        // half-screen of the sticky hold with every word lit, so smoothing
+        // (Lenis + scrub lag) catches up before the section scrolls away.
+        scrollTrigger: { trigger: section, start: 'top 60%', end: 'bottom 150%', scrub: 0.5 },
       },
     );
   });

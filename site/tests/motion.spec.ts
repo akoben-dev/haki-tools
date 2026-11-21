@@ -11,7 +11,7 @@ test('animated tier: particles start as the logo and end as the logo at the cont
   expect((await motion(page)).stage).toBe(1);
   await expect(page.locator('.hero-mark')).toBeHidden();
   await scrollToFraction(page, 1);
-  await expect.poll(async () => (await motion(page)).stage, { timeout: 8000 }).toBe(8);
+  await expect.poll(async () => (await motion(page)).stage, { timeout: 8000 }).toBe(9);
 });
 
 test('full tier on desktop pins the services lanes and morphs one formation per lane', async ({ page }, info) => {

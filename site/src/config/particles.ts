@@ -14,19 +14,20 @@ const lane = (target: TargetName): Keyframe => ({
   mobile: { x: 0, y: 0.05, scale: 0.78, opacity: 0.28 },
 });
 
-/** Home: field → logo (hero) → cloud (statement) → lanes → cloud → logo (contact). */
+/** Home: field → logo (hero) → cloud (statement) → lanes → hidden (why it matters) → cloud (process) → logo (contact). */
 export function homeKeyframes(lanes: TargetName[]) {
   const keyframes: Keyframe[] = [
     field(0.5, 0.5),
     { target: 'logo', x: 0.47, y: 0.02, scale: 0.6, opacity: 1, disperse: 0, mobile: { x: 0, y: 0.42, scale: 0.5, opacity: 0.9 } },
     field(0.24, 0.9),
     ...lanes.map(lane),
+    field(0, 0.95), // "Why it matters": particles fade out so the cards read cleanly
     field(0.2, 0.95),
     { target: 'logo', x: -0.42, y: 0.05, scale: 0.95, opacity: 0.16, disperse: 0.03, mobile: { x: 0, y: 0.1, scale: 0.7, opacity: 0.12 } },
   ];
   const servicesBase = 3;
   const afterLanes = servicesBase + lanes.length - 1; // last lane stage
-  return { keyframes, servicesBase, afterLanes, contact: keyframes.length - 1 };
+  return { keyframes, servicesBase, afterLanes, process: afterLanes + 2, contact: keyframes.length - 1 };
 }
 
 /** Services page: field → logo (hero) → one formation per lane → logo (call to action). */
