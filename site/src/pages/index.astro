@@ -11,14 +11,14 @@ import Contact from '../components/Contact.astro';
 import { homeKeyframes } from '../config/particles';
 
 const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
-const { keyframes, servicesBase, afterLanes, contact } = homeKeyframes(lanes.map((l) => l.data.particle));
+const { keyframes, servicesBase, afterLanes, process, contact } = homeKeyframes(lanes.map((l) => l.data.particle));
 ---
 <Base keyframes={keyframes} initialStage={1}>
   <Hero stageFrom={1} stageTo={2} />
   <Statement />
   <Services stageBase={servicesBase} />
   <Outcomes stageFrom={afterLanes} stageTo={afterLanes + 1} />
-  <Process />
+  <Process stageFrom={process - 1} stageTo={process} />
   <Faq />
   <Contact stageFrom={contact - 1} stageTo={contact} />
 </Base>
