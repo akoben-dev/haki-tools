@@ -90,6 +90,7 @@ resource "aws_iam_role_policy" "contact" {
 data "archive_file" "contact" {
   type        = "zip"
   source_dir  = "${path.module}/lambda/contact"
+  excludes    = ["spam.test.mjs"]
   output_path = "${path.module}/.build/contact.zip"
 }
 

@@ -195,9 +195,9 @@ html[data-motion='reduced'] .progress-line, html[data-motion='static'] .progress
 @media (min-width: 640px) { .form-grid { grid-template-columns: 1fr 1fr; } .span-2 { grid-column: span 2; } }
 .field label, .field legend { display: block; font: 600 0.86rem/1.3 var(--font-display); margin-bottom: 8px; padding: 0; }
 .field .opt { color: var(--muted); font-weight: 400; }
-.field input, .field textarea { width: 100%; background: rgb(var(--bg-rgb) / 0.7); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font: inherit; font-size: 1rem; padding: 13px 15px; transition: border-color 0.2s, box-shadow 0.2s; }
+.field input, .field textarea, .field select { width: 100%; background: rgb(var(--bg-rgb) / 0.7); border: 1px solid var(--line); border-radius: 12px; color: var(--text); font: inherit; font-size: 1rem; padding: 13px 15px; transition: border-color 0.2s, box-shadow 0.2s; }
 .field textarea { min-height: 140px; resize: vertical; }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--mint); box-shadow: 0 0 0 3px var(--mint-dim); }
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--mint); box-shadow: 0 0 0 3px var(--mint-dim); }
 .field [aria-invalid='true'] { border-color: var(--danger); }
 .field-error { color: var(--danger); font-size: 0.85rem; margin-top: 6px; min-height: 0; }
 fieldset.field { border: 0; margin: 0; padding: 0; }
