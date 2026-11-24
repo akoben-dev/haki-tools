@@ -1,6 +1,8 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import { site } from '../config/site';
+// One source of truth, shared with the contact Lambda's spam filter.
+import { PROJECT_TYPES, TIMELINES, BUDGETS } from '../../../infra/lambda/contact/choices.mjs';
 interface Props { stageFrom?: number; stageTo?: number }
 const { stageFrom, stageTo } = Astro.props;
 const copy = (await getEntry('copy', 'contact'))!.data;
@@ -8,6 +10,9 @@ const lanes = (await getCollection('services')).sort((a, b) => a.data.order - b.
 const stageAttrs = stageFrom !== undefined
   ? { 'data-stage-from': stageFrom, 'data-stage-to': stageTo, 'data-stage-start': 'top bottom', 'data-stage-end': 'top 15%' }
   : {};
+const laneTitles = [...lanes.map((l) => l.data.title), 'Not sure yet'];
+if ([...laneTitles].sort().join('|') !== [...PROJECT_TYPES].sort().join('|'))
+  throw new Error(`Contact form project types ${JSON.stringify(laneTitles)} must match PROJECT_TYPES in infra/lambda/contact/choices.mjs`);
 ---
 <section class="section" id="contact" aria-labelledby="contact-heading" {...stageAttrs}>
   <div class="wrap contact-grid">
@@ -55,11 +60,17 @@ const stageAttrs = stageFrom !== undefined
           </div>
           <div class="field">
             <label for="f-timeline">Timeline <span class="opt">(optional)</span></label>
-            <input id="f-timeline" name="timeline" maxlength="120" />
+            <select id="f-timeline" name="timeline">
+              <option value="">Choose one</option>
+              {TIMELINES.map((t) => <option value={t}>{t}</option>)}
+            </select>
           </div>
           <div class="field">
             <label for="f-budget">Budget range <span class="opt">(optional)</span></label>
-            <input id="f-budget" name="budget" maxlength="120" />
+            <select id="f-budget" name="budget">
+              <option value="">Choose one</option>
+              {BUDGETS.map((b) => <option value={b}>{b}</option>)}
+            </select>
           </div>
           <!-- Spam traps: humans never see or fill these. -->
           <div class="hp" aria-hidden="true">

@@ -5,6 +5,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2';
 import { SSMClient, GetParameterCommand } from '@aws-sdk/client-ssm';
+import { spamReason } from './spam.mjs';
 
 const ses = new SESv2Client({});
 const ssm = new SSMClient({});
@@ -142,6 +143,8 @@ export async function handler(event) {
     log({ outcome: 'invalid', fields: Object.keys(errors) });
     return wantsJson ? json(400, { ok: false, errors }) : redirect('/contact/error/');
   }
+  const spam = spamReason(data);
+  if (spam) return log({ outcome: `spam:${spam}` }), done();
 
   const subject = oneLine(`New inquiry: ${data.business_name} (${data.project_type || 'Not sure yet'})`).slice(0, 150);
   try {
