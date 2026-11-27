@@ -11,7 +11,7 @@ test('animated tier: particles start as the logo and end as the logo at the cont
   expect((await motion(page)).stage).toBe(1);
   await expect(page.locator('.hero-mark')).toBeHidden();
   await scrollToFraction(page, 1);
-  await expect.poll(async () => (await motion(page)).stage, { timeout: 8000 }).toBe(9);
+  await expect.poll(async () => (await motion(page)).stage, { timeout: 8000 }).toBe(8);
 });
 
 test('full tier on desktop pins the services lanes and morphs one formation per lane', async ({ page }, info) => {
@@ -22,14 +22,7 @@ test('full tier on desktop pins the services lanes and morphs one formation per 
   await lanes.first().scrollIntoViewIfNeeded();
   // Walk to each lane through the pin and check the particle stage matches it.
   for (let i = 0; i < 4; i++) {
-    await page.evaluate((i) => {
-      const st = (window as any).ScrollTrigger;
-      const track = document.querySelector('[data-track]')!;
-      const top = track.parentElement!.getBoundingClientRect().top + scrollY;
-      const dist = track.scrollWidth - innerWidth;
-      window.scrollTo(0, top + (dist * i) / 3);
-      void st;
-    }, i);
+    await page.evaluate((i) => window.scrollTo(0, (window as any).__hakiLaneStops()[i]), i);
     await expect.poll(async () => Math.round((await motion(page)).stage * 100) / 100, { timeout: 8000 }).toBe(3 + i);
   }
 });

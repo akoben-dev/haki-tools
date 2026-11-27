@@ -207,25 +207,47 @@ function servicesTrack() {
 
   mm.add(caps.tier === 'full' ? '(min-width: 900px)' : '(min-width: 99999px)', () => {
     root.classList.add('services-pinned');
-    stageWriter({ trigger: intro, from: base - 1, to: base, start: 'top 75%', end: 'bottom 35%' });
+    // The first formation assembles only as the first lane arrives, so the
+    // intro text never has a half-formed cloud behind it.
+    stageWriter({ trigger: intro, from: base - 1, to: base, start: 'bottom 70%', end: 'bottom top' });
+    const n = lanes.length;
     const distance = () => track.scrollWidth - innerWidth;
-    gsap.to(track, {
-      x: () => -distance(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: track,
-        start: 'top top',
-        end: () => '+=' + distance(),
-        pin: true,
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        // Settle on a lane rather than resting between two.
-        snap: { snapTo: 1 / (lanes.length - 1), duration: { min: 0.3, max: 0.9 }, delay: 0.12, ease: 'power2.inOut', inertia: false },
-        onUpdate: (self) => writeStage(base + self.progress * (lanes.length - 1)),
-        onLeave: () => writeStage(base + lanes.length - 1),
-        onLeaveBack: () => writeStage(base),
+    // Move, then hold, for each lane: the hold is scroll you spend with the
+    // lane's text in place and its formation finished, so it's hard to skim past.
+    const MOVE = 1;
+    const HOLD = 1.2;
+    let st: ScrollTrigger | undefined;
+    const tl = gsap.timeline({
+      defaults: { ease: 'power1.inOut' },
+      onUpdate: () => {
+        // Only while pinned: after a jump past the section the scrub keeps
+        // catching up and must not overwrite later sections' stages.
+        if (!st?.isActive) return;
+        const d = distance();
+        if (d > 0) writeStage(base + (-Number(gsap.getProperty(track, 'x')) / d) * (n - 1));
       },
     });
+    tl.addLabel('lane0').to({}, { duration: HOLD });
+    for (let i = 1; i < n; i++) {
+      tl.to(track, { x: () => (-distance() * i) / (n - 1), duration: MOVE });
+      tl.addLabel(`lane${i}`).to({}, { duration: HOLD });
+    }
+    st = ScrollTrigger.create({
+      animation: tl,
+      trigger: track,
+      start: 'top top',
+      // About 1.3 screens of scrolling per lane.
+      end: () => '+=' + innerHeight * 1.3 * n,
+      pin: true,
+      scrub: 0.8,
+      invalidateOnRefresh: true,
+      // Settle on a lane rather than resting between two.
+      snap: { snapTo: 'labelsDirectional', duration: { min: 0.3, max: 0.9 }, delay: 0.12, ease: 'power2.inOut', inertia: false },
+      onLeave: () => writeStage(base + n - 1),
+      onLeaveBack: () => writeStage(base),
+    });
+    // Scroll position where each lane is settled (for tests).
+    (window as any).__hakiLaneStops = () => Array.from(lanes, (_, i) => st!.labelToScroll(`lane${i}`) + innerHeight * 0.3);
     return () => root.classList.remove('services-pinned');
   });
 
