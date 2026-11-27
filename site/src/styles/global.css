@@ -43,7 +43,7 @@ body {
   background-attachment: fixed;
   color: var(--text);
   font: 17px/1.65 var(--font-body);
-  overflow-x: hidden;
+  overflow-x: clip; /* not hidden: hidden turns body into a scroll box and breaks position: sticky */
   -webkit-font-smoothing: antialiased;
 }
 img, svg { display: block; max-width: 100%; }

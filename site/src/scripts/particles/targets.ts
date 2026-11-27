@@ -6,7 +6,7 @@
 // Output: Float32Array of N*3 positions in "shape units" (fits a 2×2 box
 // centred on 0, y up). The renderer places and scales them per viewport.
 
-export type TargetName = 'field' | 'logo' | 'web' | 'growth' | 'network' | 'rings';
+export type TargetName = 'field' | 'logo' | 'web' | 'growth' | 'network' | 'rings' | 'check' | 'steps';
 
 const RES = 512; // raster resolution for sampling
 
@@ -208,6 +208,50 @@ const drawings: Record<Exclude<TargetName, 'field' | 'logo'>, { aspect: number; 
         ctx.fillRect(0, -s * 0.004, s * (i % 6 === 0 ? 0.03 : 0.015), s * 0.008);
         ctx.restore();
       }
+    },
+  },
+  // Statement ("they do real work"): a check mark inside a ring — job done.
+  check: {
+    aspect: 1,
+    draw(ctx, s) {
+      const c = s / 2;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = s * 0.03;
+      ctx.beginPath();
+      ctx.arc(c, c, 0.42 * s, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.lineWidth = s * 0.07;
+      ctx.beginPath();
+      ctx.moveTo(s * 0.3, s * 0.52);
+      ctx.lineTo(s * 0.44, s * 0.66);
+      ctx.lineTo(s * 0.71, s * 0.36);
+      ctx.stroke();
+    },
+  },
+  // Process: four steps joined by one path, the last one finished (filled).
+  steps: {
+    aspect: 0.75,
+    draw(ctx, s) {
+      const W = s * 0.75, H = s;
+      const pts: [number, number][] = [[0.25, 0.1], [0.75, 0.37], [0.25, 0.63], [0.75, 0.9]];
+      ctx.lineWidth = s * 0.022;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      pts.forEach(([x, y], i) => (i ? ctx.lineTo(x * W, y * H) : ctx.moveTo(x * W, y * H)));
+      ctx.stroke();
+      pts.forEach(([x, y], i) => {
+        ctx.beginPath();
+        ctx.arc(x * W, y * H, s * 0.065, 0, Math.PI * 2);
+        if (i === pts.length - 1) ctx.fill();
+        else {
+          ctx.lineWidth = s * 0.02;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(x * W, y * H, s * 0.02, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
     },
   },
 };

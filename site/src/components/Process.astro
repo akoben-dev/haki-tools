@@ -1,9 +1,11 @@
 ---
+interface Props { stageFrom: number; stageTo: number }
+const { stageFrom, stageTo } = Astro.props;
 import { getCollection, getEntry } from 'astro:content';
 const copy = (await getEntry('copy', 'process'))!.data;
 const steps = (await getCollection('process')).sort((a, b) => a.data.order - b.data.order);
 ---
-<section class="section" id="process" aria-labelledby="process-heading">
+<section class="section" id="process" data-stage-from={stageFrom} data-stage-to={stageTo} data-stage-start="top 80%" data-stage-end="top 30%" aria-labelledby="process-heading">
   <div class="wrap">
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id="process-heading" class="display" data-reveal="display">{copy.heading}</h2>
