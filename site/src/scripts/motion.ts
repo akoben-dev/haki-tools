@@ -227,10 +227,13 @@ function servicesTrack() {
         if (d > 0) writeStage(base + (-Number(gsap.getProperty(track, 'x')) / d) * (n - 1));
       },
     });
-    tl.addLabel('lane0').to({}, { duration: HOLD });
+    // Each lane's label sits in the middle of its hold, so snapping to the
+    // nearest label never skips a lane.
+    const hold = (i: number) => tl.to({}, { duration: HOLD / 2 }).addLabel(`lane${i}`).to({}, { duration: HOLD / 2 });
+    hold(0);
     for (let i = 1; i < n; i++) {
       tl.to(track, { x: () => (-distance() * i) / (n - 1), duration: MOVE });
-      tl.addLabel(`lane${i}`).to({}, { duration: HOLD });
+      hold(i);
     }
     st = ScrollTrigger.create({
       animation: tl,
@@ -242,12 +245,12 @@ function servicesTrack() {
       scrub: 0.8,
       invalidateOnRefresh: true,
       // Settle on a lane rather than resting between two.
-      snap: { snapTo: 'labelsDirectional', duration: { min: 0.3, max: 0.9 }, delay: 0.12, ease: 'power2.inOut', inertia: false },
+      snap: { snapTo: 'labels', duration: { min: 0.3, max: 0.9 }, delay: 0.12, ease: 'power2.inOut', inertia: false },
       onLeave: () => writeStage(base + n - 1),
       onLeaveBack: () => writeStage(base),
     });
     // Scroll position where each lane is settled (for tests).
-    (window as any).__hakiLaneStops = () => Array.from(lanes, (_, i) => st!.labelToScroll(`lane${i}`) + innerHeight * 0.3);
+    (window as any).__hakiLaneStops = () => Array.from(lanes, (_, i) => st!.labelToScroll(`lane${i}`));
     return () => root.classList.remove('services-pinned');
   });
 

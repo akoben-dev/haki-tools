@@ -1,4 +1,6 @@
 ---
+interface Props { stageFrom: number; stageTo: number }
+const { stageFrom, stageTo } = Astro.props;
 import { getEntry } from 'astro:content';
 const text = (await getEntry('copy', 'statement'))!.data.statement ?? '';
 // "*word*" marks an accent word.
@@ -7,7 +9,7 @@ const words = text.split(/\s+/).map((w) => {
   return m ? { accent: m[1], rest: m[2] } : { plain: w };
 });
 ---
-<section class="statement" data-words aria-label="Our approach">
+<section class="statement" data-words data-stage-from={stageFrom} data-stage-to={stageTo} data-stage-start="bottom 90%" data-stage-end="bottom 40%" aria-label="Our approach">
   <div class="statement-sticky">
     <div class="wrap">
       <p class="statement-text">
